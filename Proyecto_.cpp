@@ -1,11 +1,11 @@
 /*
-* Universidad Nacional Aut髇oma de M閤ico.
-* Facultad de Ingenier韆.
-* Computaci髇 gr醘ica e interacci髇 humano-computadora.
+* Universidad Nacional Aut贸noma de M茅xico.
+* Facultad de Ingenier铆a.
+* Computaci贸n gr谩fica e interacci贸n humano-computadora.
 * Grupo: 6.
 * Proyecto.
-* Alumnos: Juan Andr閟 Cruz Romero.
-*		   Alexis Rafael del Valle Arag髇.
+* Alumnos: Juan Andr茅s Cruz Romero.
+*		   Alexis Rafael del Valle Arag贸n.
 *		   Mauricio Blancas.//
 */
 //para cargar imagen
@@ -53,12 +53,14 @@ Model PORSCHE_M;
 Model PORSCHELLANTA_M;
 //-------Modelo esfera 1 estrella.-------
 Model ESFERA1ESTRELLA_M;
-//-------Modelo faro p鷅lico.-------
+//-------Modelo faro p煤blico.-------
 Model FAROPUBLICO_M;
 //-------Modelo peralte.-------
 Model PERALTE_M;
 
 Skybox skybox;
+Skybox skybox1;
+Skybox skybox2;
 
 //materiales
 Material Material_brillante;
@@ -82,7 +84,7 @@ static const char* fShader = "shaders/shader_light.frag";
 void inputKeyframes(bool* keys);
 
 
-//c醠culo del promedio de las normales para sombreado de Phong
+//c谩lculo del promedio de las normales para sombreado de Phong
 void calcAverageNormals(unsigned int* indices, unsigned int indiceCount, GLfloat* vertices, unsigned int verticeCount,
 	unsigned int vLength, unsigned int normalOffset)
 {
@@ -201,21 +203,21 @@ void CreateShaders()
 }
 
 //-------Keyframes.-------
-//Variables animaci髇.
+//Variables animaci贸n.
 float Rotate_ = 0.0f;
 float RotateOffset_ = 4.0f;
 bool FlagForward_;
 float reproduciranimacion, habilitaranimacion,
 guardoFrame, reinicioFrame, contador = 0;
 bool animacion = false;
-float PosicionX_ = 0.0f, PosicionY_ = 0.0f, PosicionZ_ = 0.0f;//Posici髇 inicial.
+float PosicionX_ = 0.0f, PosicionY_ = 0.0f, PosicionZ_ = 0.0f;//Posici贸n inicial.
 float MovimientoX_ = 0.0f, MovimientoY_ = 0.0f, MovimientoZ_ = 0.0f;//Movimiento en ejes.
 float Giro_ = 0;
 float Ciclo_, Ciclo_1;
 
 #define MAX_FRAMES 9000
-int i_max_steps = 70;//M醩 pasos m醩 lentitud.
-int i_curr_steps = 33;//N鷐ero m醲imo de frames de la animaci髇 actual.
+int i_max_steps = 70;//M谩s pasos m谩s lentitud.
+int i_curr_steps = 33;//N煤mero m谩ximo de frames de la animaci贸n actual.
 typedef struct _frame
 {
 	//Variables para guardar movimiento en keyframes.
@@ -230,7 +232,7 @@ typedef struct _frame
 }FRAME;
 
 FRAME KeyFrame[MAX_FRAMES];
-int FrameIndex = 33;//N鷐ero m醲imo de frames de la animaci髇 actual.
+int FrameIndex = 33;//N煤mero m谩ximo de frames de la animaci贸n actual.
 bool play = false;
 int playIndex = 0;
 
@@ -315,26 +317,40 @@ int main()
 	//-------Modelo esfera 1 estrella.-------
 	Model ESFERA1ESTRELLA_M = Model();
 	ESFERA1ESTRELLA_M.LoadModel("Models/1 estrella_.obj");
-	//-------Modelo faro p鷅lico.-------
+	//-------Modelo faro p煤blico.-------
 	Model FAROPUBLICO_M = Model();
-	FAROPUBLICO_M.LoadModel("Models/Faro p鷅lico_2.obj");
+	FAROPUBLICO_M.LoadModel("Models/Faro p煤blico_2.obj");
 	//-------Modelo peralte.-------
 	Model PERALTE_M = Model();
 	PERALTE_M.LoadModel("Models/Peralte_.obj");
 
+	//Skybox
 	std::vector<std::string> skyboxFaces;
-	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_rt.tga");
-	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_lf.tga");
-	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_dn.tga");
-	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_up.tga");
-	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_bk.tga");
-	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_ft.tga");
-	skybox = Skybox(skyboxFaces);
+	std::vector<std::string> skyboxFaces2;
+
+	skyboxFaces.push_back("Textures/Skybox/Dia_derecha.jpg");
+	skyboxFaces.push_back("Textures/Skybox/Dia_izquierda.jpg");
+	skyboxFaces.push_back("Textures/Skybox/Dia_abajo.jpg");
+	skyboxFaces.push_back("Textures/Skybox/Dia_arriba.jpg");
+	skyboxFaces.push_back("Textures/Skybox/Dia_atras.jpg");
+	skyboxFaces.push_back("Textures/Skybox/Dia_frente.jpg");
+	
+	//Skybox de noche
+	skyboxFaces2.push_back("Textures/Skybox/Noche_izquierda.jpg");
+	skyboxFaces2.push_back("Textures/Skybox/Noche_derecha.jpg");
+	skyboxFaces2.push_back("Textures/Skybox/Noche_abajo.jpg");
+	skyboxFaces2.push_back("Textures/Skybox/Noche_arriba.jpg");
+	skyboxFaces2.push_back("Textures/Skybox/Noche_atras.jpg");
+	skyboxFaces2.push_back("Textures/Skybox/Noche_frente.jpg");
+	
+	skybox = Skybox(skyboxFaces);// Ejecutar skybox de dia
+	skybox2 = Skybox(skyboxFaces2); // Ejecutar skybox de noche
+
 
 	Material_brillante = Material(4.0f, 256);
 	Material_opaco = Material(0.3f, 4);
 
-	//luz direccional, s髄o 1 y siempre debe de existir
+	//luz direccional, s贸lo 1 y siempre debe de existir
 	mainLight = DirectionalLight(1.0f, 1.0f, 1.0f,
 		0.5f, 0.3f,
 		1.0f, 0.0f, -1.0f);
@@ -351,20 +367,20 @@ int main()
 		5.0f);
 	spotLightCount++;
 	*/
-	//-------Luz de esfera del drag髇.-------
+	//-------Luz de esfera del drag贸n.-------
 	spotLights[0] = SpotLight(1.0f, 0.4f, 0.0f,//Color: Naranja.
-		0.5f, 1.0f,//Concentraci髇.
-		-2.0f, 5.0f, -50.2f,//Posici髇 normal.
+		0.5f, 1.0f,//Concentraci贸n.
+		-2.0f, 5.0f, -50.2f,//Posici贸n normal.
 		1.0f, -5.0f, 0.0f,//Profundidad normal.
-		1.0f, 0.0f, 0.0f,//Cercan韆.
+		1.0f, 0.0f, 0.0f,//Cercan铆a.
 		50.0f);//Ancho.
 	spotLightCount++;
-	//-------Luz faro p鷅lico.-------
+	//-------Luz faro p煤blico.-------
 	spotLights[1] = SpotLight(1.0f, 0.0f, 1.0f,//Color: Magenta.
-		0.5f, 1.0f,//Concentraci髇.
-		0.0f, 5.0f, 50.2f,//Posici髇 normal.
+		0.5f, 1.0f,//Concentraci贸n.
+		0.0f, 5.0f, 50.2f,//Posici贸n normal.
 		0.0f, -5.0f, 0.0f,//Profundidad normal.
-		1.0f, 0.0f, 0.0f,//Cercan韆.
+		1.0f, 0.0f, 0.0f,//Cercan铆a.
 		89.0f);//Ancho.
 	spotLightCount++;
 
@@ -373,7 +389,7 @@ int main()
 	GLuint uniformColor = 0;
 	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 1000.0f);
 	
-	//-------Animaci髇 keyframes.-------.
+	//-------Animaci贸n keyframes.-------.
 	KeyFrame[0].MovimientoX_ = 0.000000f;
 	KeyFrame[0].MovimientoY_ = 0.000000f;
 	KeyFrame[0].MovimientoZ_ = 0.000000f;
@@ -478,7 +494,22 @@ int main()
 		// Clear the window
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		
+		//--------------Alternar Skybox-----------
+		/*while (true)
+		{
+
 		skybox.DrawSkybox(camera.calculateViewMatrix(), projection);
+
+		std::this_thread::sleep_for(std::chrono::seconds(20)); // Esperar 20 segundos
+
+		skybox2.DrawSkybox(camera.calculateViewMatrix(), projection); // Ejecutar skybox de noche
+
+		std::this_thread::sleep_for(std::chrono::seconds(20)); // Esperar 20 segundos
+		}
+		*/
+		skybox.DrawSkybox(camera.calculateViewMatrix(), projection);
+
 		shaderList[0].UseShader();
 		uniformModel = shaderList[0].GetModelLocation();
 		uniformProjection = shaderList[0].GetProjectionLocation();
@@ -487,7 +518,7 @@ int main()
 		uniformColor = shaderList[0].getColorLocation();
 		uniformTextureOffset = shaderList[0].getOffsetLocation();
 
-		//informaci髇 en el shader de intensidad especular y brillo
+		//informaci贸n en el shader de intensidad especular y brillo
 		uniformSpecularIntensity = shaderList[0].GetSpecularIntensityLocation();
 		uniformShininess = shaderList[0].GetShininessLocation();
 
@@ -496,13 +527,13 @@ int main()
 		glUniform3f(uniformEyePosition, camera.getCameraPosition().x, camera.getCameraPosition().y, camera.getCameraPosition().z);
 
 		/*
-		// luz ligada a la c醡ara de tipo flash
+		// luz ligada a la c谩mara de tipo flash
 		glm::vec3 lowerLight = camera.getCameraPosition();
 		lowerLight.y -= 0.3f;
 		spotLights[0].SetFlash(lowerLight, camera.getCameraDirection());
 		*/
 
-		//informaci髇 al shader de fuentes de iluminaci髇
+		//informaci贸n al shader de fuentes de iluminaci贸n
 		shaderList[0].SetDirectionalLight(&mainLight);
 		shaderList[0].SetPointLights(pointLights, pointLightCount);
 		shaderList[0].SetSpotLights(spotLights, spotLightCount);
@@ -568,7 +599,7 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		ESFERA1ESTRELLA_M.RenderModel();
 
-		//-------Modelo faro p鷅lico.-------
+		//-------Modelo faro p煤blico.-------
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(0.0f, -2.0f, 50.0f));
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
@@ -585,7 +616,7 @@ int main()
 
 void inputKeyframes(bool* keys)
 {
-	//Espacio reproduce de nuevo animaci髇.
+	//Espacio reproduce de nuevo animaci贸n.
 	if (keys[GLFW_KEY_SPACE])
 	{
 		if (reproduciranimacion < 1)
@@ -607,7 +638,7 @@ void inputKeyframes(bool* keys)
 			}
 		}
 	}
-	//0 resetea animaci髇.
+	//0 resetea animaci贸n.
 	if (keys[GLFW_KEY_0])
 	{
 		if (habilitaranimacion < 1)
