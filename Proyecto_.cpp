@@ -523,10 +523,10 @@ int main()
 	{
 		now = glfwGetTime();
 		deltaTime = now - lastTime;
-		deltaTime = (now - lastTime) * 150;
+		deltaTime = (now - lastTime) * 270;
 		lastTime = now;
 		
-		//Realizamos nuestro ciclo de día y noche dentro de while
+		//Realizamos nuestro ciclo de día y noche dentro de whilec con duración de 1 minuto con 10 segundos.
 		if (dia == true)
 		{
 			if (movSun < 1.0f)
