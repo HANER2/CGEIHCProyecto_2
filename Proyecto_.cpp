@@ -225,7 +225,7 @@ bool FlagForward_;
 float reproduciranimacion, habilitaranimacion,
 guardoFrame, reinicioFrame, contador = 0;
 bool animacion = false;
-float PosicionX_ = 0.0f, PosicionY_ = 0.0f, PosicionZ_ = 0.0f;//Posición inicial.
+float PosicionX_ = 0.0f, PosicionY_ = -1.4f, PosicionZ_ = 285.0f;//Posición inicial.
 float MovimientoX_ = 0.0f, MovimientoY_ = 0.0f, MovimientoZ_ = 0.0f;//Movimiento en ejes.
 float Giro_ = 0;
 float Ciclo_, Ciclo_1;
@@ -630,7 +630,7 @@ int main()
 		model = glm::mat4(1.0);
 		//model = glm::translate(model, glm::vec3(0.0f, -1.0f, 100.0f));
 		model = glm::translate(model, glm::vec3(PosicionX_ + MovimientoX_, PosicionY_ + MovimientoY_, PosicionZ_ + MovimientoZ_));
-		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		model = glm::scale(model, glm::vec3(1.4f, 1.4f, 1.4f));
 		model = glm::rotate(model, -90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::rotate(model, Giro_ * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		modelaux = model;
@@ -668,7 +668,7 @@ int main()
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(0.0f, -2.0f, -50.0f));
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.07f, 0.07f, 0.07f));
+		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		ESFERA1ESTRELLA_M.RenderModel();
 
