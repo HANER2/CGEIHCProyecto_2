@@ -58,6 +58,21 @@ Model FAROPUBLICO_M;
 //-------Modelo peralte.-------
 Model PERALTE_M;
 
+//-------Modelo Casa de Kaiosama.-------
+Model Casa_Kaio;
+
+//-------Maquina expendedora.-------
+Model MaquinaExpendedora;
+
+//-------Ring ML.-------
+Model Ring_ML;
+
+//-------Lata.-------
+Model Lata;
+
+//-------Nube Voladora.-------
+Model Nube_Goku;
+
 Skybox skybox;
 Skybox skybox1;
 Skybox skybox2;
@@ -323,7 +338,28 @@ int main()
 	//-------Modelo peralte.-------
 	Model PERALTE_M = Model();
 	PERALTE_M.LoadModel("Models/Peralte_.obj");
+	
+	//Modelo Casa de Kaiosama
+	Model Casa_Kaio = Model();
+	Casa_Kaio.LoadModel("Models/Casa_Kaio.obj");
 
+	//Maquina expendedora
+	Model MaquinaExpendedora = Model();
+	MaquinaExpendedora.LoadModel("Models/MaquinaExpendedora.obj");
+
+	//Ring ML
+	Model Ring_ML = Model();
+	Ring_ML.LoadModel("Models/Ring_ML.obj");
+
+	//Lata
+	Model Lata = Model();
+	Lata.LoadModel("Models/Lata.obj");
+
+	//Nube voladora
+	Model Nube_Goku = Model();
+	Nube_Goku.LoadModel("Models/Nube_Goku.obj");
+	
+	
 	//Skybox
 	std::vector<std::string> skyboxFaces;
 	std::vector<std::string> skyboxFaces2;
@@ -552,6 +588,43 @@ int main()
 		pisoTexture.UseTexture();
 		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[2]->RenderMesh();
+		
+		//Modelo ----Casa de Kaiosama--------
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-120.0f, -2.0f, -85.0f)); //ubicación del modelo
+		model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.15f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Casa_Kaio.RenderModel();
+
+		//Maquina expendedora
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-120.0f, -2.0f, -25.0f));
+		modelaux = model;
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		MaquinaExpendedora.RenderModel();
+
+		//Lata
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(2.0f, 7.0f, 4.5f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.8f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Lata.RenderModel();
+
+		//Ring ML
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-100.0f, -2.0f, 120.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.15f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Ring_ML.RenderModel();
+
+		//Nube voladora
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 110.0f, 0.0f));
+		//model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.3f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Nube_Goku.RenderModel();
+
 
 		//-------Modelo PORSCHE.-------
 		model = glm::mat4(1.0);
