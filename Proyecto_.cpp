@@ -307,7 +307,7 @@ int main()
 
 	camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.5f, 0.5f);
 
-	pisoTexture = Texture("Textures/piso.tga");
+	pisoTexture = Texture("Textures/cesped.png");
 	pisoTexture.LoadTextureA();
 	//-------Modelo PORSCHE.-------
 	PORSCHE_M = Model();
