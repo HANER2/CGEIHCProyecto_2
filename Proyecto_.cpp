@@ -57,21 +57,18 @@ Model ESFERA1ESTRELLA_M;
 Model FAROPUBLICO_M;
 //-------Modelo peralte.-------
 Model PERALTE_M;
-
 //-------Modelo Casa de Kaiosama.-------
 Model Casa_Kaio;
-
 //-------Maquina expendedora.-------
 Model MaquinaExpendedora;
-
 //-------Ring ML.-------
 Model Ring_ML;
-
 //-------Lata.-------
 Model Lata;
-
 //-------Nube Voladora.-------
 Model Nube_Goku;
+//-------Modelo autopista.-------
+Model AUTOPISTA_M;
 
 Skybox skybox;
 Skybox skybox1;
@@ -225,7 +222,7 @@ bool FlagForward_;
 float reproduciranimacion, habilitaranimacion,
 guardoFrame, reinicioFrame, contador = 0;
 bool animacion = false;
-float PosicionX_ = 0.0f, PosicionY_ = -1.4f, PosicionZ_ = 285.0f;//Posición inicial.
+float PosicionX_ = 0.0f, PosicionY_ = 0.0f, PosicionZ_ = 0.0f;//Posición inicial.
 float MovimientoX_ = 0.0f, MovimientoY_ = 0.0f, MovimientoZ_ = 0.0f;//Movimiento en ejes.
 float Giro_ = 0;
 float Ciclo_, Ciclo_1;
@@ -338,27 +335,24 @@ int main()
 	//-------Modelo peralte.-------
 	Model PERALTE_M = Model();
 	PERALTE_M.LoadModel("Models/Peralte_.obj");
-	
 	//Modelo Casa de Kaiosama
 	Model Casa_Kaio = Model();
 	Casa_Kaio.LoadModel("Models/Casa_Kaio.obj");
-
 	//Maquina expendedora
 	Model MaquinaExpendedora = Model();
 	MaquinaExpendedora.LoadModel("Models/MaquinaExpendedora.obj");
-
 	//Ring ML
 	Model Ring_ML = Model();
 	Ring_ML.LoadModel("Models/Ring_ML.obj");
-
 	//Lata
 	Model Lata = Model();
 	Lata.LoadModel("Models/Lata.obj");
-
 	//Nube voladora
 	Model Nube_Goku = Model();
 	Nube_Goku.LoadModel("Models/Nube_Goku.obj");
-	
+	//-------Modelo Autopista.-------
+	Model AUTOPISTA_M = Model();
+	AUTOPISTA_M.LoadModel("Models/Autopista_.obj");
 	
 	//Skybox
 	std::vector<std::string> skyboxFaces;
@@ -629,7 +623,7 @@ int main()
 		//-------Modelo PORSCHE.-------
 		model = glm::mat4(1.0);
 		//model = glm::translate(model, glm::vec3(0.0f, -1.0f, 100.0f));
-		model = glm::translate(model, glm::vec3(PosicionX_ + MovimientoX_, PosicionY_ + MovimientoY_, PosicionZ_ + MovimientoZ_));
+		model = glm::translate(model, glm::vec3(0.0f + MovimientoX_, -1.4f + MovimientoY_, 327.0f + MovimientoZ_));
 		model = glm::scale(model, glm::vec3(1.4f, 1.4f, 1.4f));
 		model = glm::rotate(model, -90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::rotate(model, Giro_ * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
@@ -680,8 +674,112 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		FAROPUBLICO_M.RenderModel();
 
-		glUseProgram(0);
+		//-------Circuito cerrado.-------
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(3.0f, -1.5f, 327.0f));//X: 54.
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		AUTOPISTA_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(57.0f, -1.5f, 327.0f));
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		AUTOPISTA_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(111.0f, -1.5f, 327.0f));
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		AUTOPISTA_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(165.0f, -1.5f, 327.0f));
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		AUTOPISTA_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(219.0f, -1.5f, 327.0f));
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		AUTOPISTA_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(273.0f, -1.5f, 327.0f));
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		AUTOPISTA_M.RenderModel();
+		//Esquina superior derecha.
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(291.0f, -2.0f, 361.5f));
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		PERALTE_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(327.0f, -1.5f, 273.5f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		AUTOPISTA_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(327.0f, -1.5f, 219.5f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		AUTOPISTA_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(327.0f, -1.5f, 165.5f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		AUTOPISTA_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(327.0f, -1.5f, 111.5f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		AUTOPISTA_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(327.0f, -1.5f, 57.5f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		AUTOPISTA_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(327.0f, -1.5f, 3.5f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		AUTOPISTA_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(327.0f, -1.5f, -50.5f));//Z: 53
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		AUTOPISTA_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(327.0f, -1.5f, -103.5f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		AUTOPISTA_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(327.0f, -1.5f, -156.5f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		AUTOPISTA_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(327.0f, -1.5f, -209.5f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		AUTOPISTA_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(327.0f, -1.5f, -262.5f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		AUTOPISTA_M.RenderModel();
 
+
+		glUseProgram(0);
 		mainWindow.swapBuffers();
 	}
 	return 0;
@@ -720,4 +818,3 @@ void inputKeyframes(bool* keys)
 		}
 	}
 }
-Compartir en github.//
