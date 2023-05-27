@@ -6,7 +6,7 @@
 * Proyecto.
 * Alumnos: Juan Andrés Cruz Romero.
 *		   Alexis Rafael del Valle Aragón.
-*		   Mauricio Blancas.//
+*		   Barulio Mauricio Blancas Galicia.//
 */
 //para cargar imagen
 #define STB_IMAGE_IMPLEMENTATION
@@ -37,6 +37,13 @@
 using namespace std;
 
 const float toRadians = 3.14159265f / 180.0f;
+
+//Declaramos nuestras variables con las cuales realizaremos el ciclo de día y de noche en el proyecto
+float movSun;
+float movySun;
+float movSunOffset;
+float luz;
+bool dia;
 
 Window mainWindow;
 std::vector<Mesh*> meshList;
@@ -316,7 +323,14 @@ int main()
 
 	CreateObjects();
 	CreateShaders();
-
+	
+	//Definimos nuestras variables con las que se hará el ciclo de día y noche
+	movySun = -1.0f; //Aquí la luz siempre va a iniciar apunto a -1 en Y 
+	movSun = -1.0f;
+	movSunOffset = 0.0002f; //Declaramos el tiempo en el que queremos que vaya avanzando la luz
+	luz = 1.0f;
+	dia = true;
+	
 	camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.5f, 0.5f);
 
 	pisoTexture = Texture("Textures/cesped.png");
@@ -511,7 +525,43 @@ int main()
 		deltaTime = now - lastTime;
 		deltaTime = (now - lastTime) * 150;
 		lastTime = now;
+		
+		//Realizamos nuestro ciclo de día y noche dentro de while
+		if (dia == true)
+		{
+			if (movSun < 1.0f)
+			{
+				movSun += movSunOffset;
 
+			}
+			else
+			{
+				dia = false;
+				movySun = 1.0f;
+				luz = 0.2f;
+				skybox = Skybox(skyboxFaces2);
+				pointLightCount = 12;
+				spotLightCount = 7;
+			}
+		}
+		else
+		{
+			if (movSun > -1.0f)
+			{
+				movSun -= movSunOffset;
+			
+			}
+			else
+			{
+				dia = true;
+				movySun = -1.0f;
+				luz = 1.0f;
+				skybox = Skybox(skyboxFaces);
+				pointLightCount = 0;
+				spotLightCount = 0;
+			}
+		}
+		
 		//Recibir eventos del usuario
 		glfwPollEvents();
 		camera.keyControl(mainWindow.getsKeys(), deltaTime);
@@ -562,7 +612,11 @@ int main()
 		lowerLight.y -= 0.3f;
 		spotLights[0].SetFlash(lowerLight, camera.getCameraDirection());
 		*/
-
+		
+		mainLight = DirectionalLight(luz, luz, luz,
+		0.5f, 0.3f,
+		0.0f, movySun, movSun);
+		
 		//información al shader de fuentes de iluminación
 		shaderList[0].SetDirectionalLight(&mainLight);
 		shaderList[0].SetPointLights(pointLights, pointLightCount);
