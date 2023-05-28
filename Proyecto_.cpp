@@ -621,9 +621,9 @@ int main()
 	unsigned int pointLightCount = 0;
 	//-------Luz de faro.-------
 	pointLights[0] = PointLight(0.0f, 0.0f, 1.0f,//Color: Azul.
-		170.0f, 1.0f,//Expande. Concentra.
+		5.0f, 0.0f,//Expande. Concentra.
 		315.0f, 0.0f, 315.0f,//Posición.
-		0.3f, 0.2f, 0.1f);
+		0.9f, 0.10f, 0.0f);
 	pointLightCount++;
 	
 	unsigned int spotLightCount = 0;
