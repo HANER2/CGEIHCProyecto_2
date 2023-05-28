@@ -1185,92 +1185,77 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		ESFERA1ESTRELLA_M.RenderModel();
 		
-				//------------ARBOLES-------------
+		//------------ARBOLES-------------
+
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(80.0f, -3.0f, 80.0f));
+		model = glm::translate(model, glm::vec3(60.0f, -3.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		arbol1.RenderModel();
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(120.0f, 0.0f, 40.0f));
+		model = glm::translate(model, glm::vec3(60.0f, -3.0f, 280.0f));
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		arbol2.RenderModel();
-
+		arbol1.RenderModel();
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(40.0f, 0.0f, 120.0f));
+		model = glm::translate(model, glm::vec3(280.0f, -3.0f, 60.0f));
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		arbol2.RenderModel();
-
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(120.0f, 0.0f, 120.0f));
-		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		arbol2.RenderModel();
+		arbol1.RenderModel();
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(180.0f, -3.0f, 180.0f));
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		arbol1.RenderModel();
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(60.0f, -3.0f, 180.0f));
-		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		arbol1.RenderModel();
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(180.0f, -3.0f, 60.0f));
-		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		arbol1.RenderModel();
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(120.0f, 0.0f, 180.0f));
+		model = glm::translate(model, glm::vec3(180.0f, 0.0f, 60.0f));
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		arbol2.RenderModel();
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(180.0f, 0.0f, 120.0f));
+		model = glm::translate(model, glm::vec3(60.0f, 0.0f, 180.0f));
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		arbol2.RenderModel();
-		
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(120.0f, 0.0f, -40.0f));
+		model = glm::translate(model, glm::vec3(-60.0f, -3.0f, 280.0f));
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		arbol2.RenderModel();
+		arbol1.RenderModel();
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(120.0f, 0.0f, -120.0f));
+		model = glm::translate(model, glm::vec3(-60.0f, -3.0f, -280.0f));
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		arbol2.RenderModel();
+		arbol1.RenderModel();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(60.0f, -3.0f, -280.0f));
+		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		arbol1.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(280.0f, -3.0f, -60.0f));
+		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		arbol1.RenderModel();
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(180.0f, -3.0f, -180.0f));
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		arbol1.RenderModel();
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(60.0f, -3.0f, -180.0f));
-		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		arbol1.RenderModel();
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(180.0f, -3.0f, -60.0f));
-		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		arbol1.RenderModel();
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(120.0f, 0.0f, -180.0f));
+		model = glm::translate(model, glm::vec3(180.0f, 0.0f, -60.0f));
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		arbol2.RenderModel();
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(180.0f, 0.0f, -120.0f));
+		model = glm::translate(model, glm::vec3(60.0f, 0.0f, -180.0f));
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		arbol2.RenderModel();
+
 		
 		//-------Circuito cerrado.-------
 		model = glm::mat4(1.0);
