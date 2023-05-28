@@ -104,6 +104,8 @@ Model Lata;
 Model Nube_Goku;
 //-------Modelo autopista.-------
 Model AUTOPISTA_M;
+//---Bocina
+Model Bocina;
 
 Skybox skybox;
 Skybox skybox1;
@@ -576,6 +578,10 @@ int main()
 	//-------Modelo Autopista.-------
 	Model AUTOPISTA_M = Model();
 	AUTOPISTA_M.LoadModel("Models/Autopista_.obj");
+	//Bocina
+	Model Bocina = Model();
+	Bocina.LoadModel("Models/Bocina.obj");
+	
 	
 	//Skybox
 	std::vector<std::string> skyboxFaces;
@@ -866,6 +872,13 @@ int main()
 		model = glm::scale(model, glm::vec3(0.3f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Nube_Goku.RenderModel();
+		
+		//Bocina
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(100.0f, -2.0f, -85.0f));
+		model = glm::rotate(model, glm::radians(-135.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Bocina.RenderModel();
 
 
 		//-------Modelo PORSCHE.-------
