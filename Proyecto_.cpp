@@ -60,8 +60,8 @@ Model PORSCHE_M;
 Model PORSCHELLANTA_M;
 //-------Modelo esfera 1 estrella.-------
 Model ESFERA1ESTRELLA_M;
-//-------Modelo faro público.-------
-Model FAROPUBLICO_M;
+//-------Modelo faro.-------
+Model FARO_M;
 //-------Modelo peralte.-------
 Model PERALTE_M;
 //-------Modelo Casa de Kaiosama.-------
@@ -343,9 +343,9 @@ int main()
 	//-------Modelo esfera 1 estrella.-------
 	Model ESFERA1ESTRELLA_M = Model();
 	ESFERA1ESTRELLA_M.LoadModel("Models/1 estrella_.obj");
-	//-------Modelo faro público.-------
-	Model FAROPUBLICO_M = Model();
-	FAROPUBLICO_M.LoadModel("Models/Faro público_2.obj");
+	//-------Modelo faro.-------
+	Model FARO_M = Model();
+	FARO_M.LoadModel("Models/Faro_2.obj");
 	//-------Modelo peralte.-------
 	Model PERALTE_M = Model();
 	PERALTE_M.LoadModel("Models/Peralte_.obj");
@@ -1032,6 +1032,108 @@ int main()
 		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		AUTOPISTA_M.RenderModel();
+		
+		//-------Modelo faro.-------
+		//Esquina superior derecha.
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(291.0f, -2.7f, 291.0f));
+		model = glm::rotate(model, -45.0f *toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		FARO_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(145.5f, -2.7f, 291.0f));//X= -145.5.
+		model = glm::rotate(model, -90.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		FARO_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(0.0f, -2.7f, 291.0f));
+		model = glm::rotate(model, -90.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		FARO_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-145.5f, -2.7f, 291.0f));
+		model = glm::rotate(model, -90.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		FARO_M.RenderModel();
+		//Esquina superior izquierda.
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(291.0f, -2.7f, -291.0f));
+		model = glm::rotate(model, 45.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		FARO_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(291.0f, -2.7f, -145.5f));//Z= +145.5.
+		model = glm::rotate(model, 0.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		FARO_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(291.0f, -2.7f, 0.0f));
+		model = glm::rotate(model, 0.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		FARO_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(291.0f, -2.7f, 145.5f));
+		model = glm::rotate(model, 0.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		FARO_M.RenderModel();
+		//Esquina inferior izquierda.
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-291.0f, -2.7f, -291.0f));
+		model = glm::rotate(model, 135.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		FARO_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-145.5f, -2.7f, -291.0f));//X= +145.5.
+		model = glm::rotate(model, 90.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		FARO_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(0.0f, -2.7f, -291.0f));
+		model = glm::rotate(model, 90.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		FARO_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(145.5f, -2.7f, -291.0f));
+		model = glm::rotate(model, 90.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		FARO_M.RenderModel();
+		//Esquina inferior derecha.
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-291.0f, -2.7f, 291.0f));
+		model = glm::rotate(model, 225.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		FARO_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-291.0f, -2.7f, 145.5f));//Z= -145.5.
+		model = glm::rotate(model, 180.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		FARO_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-291.0f, -2.7f, 0.0f));
+		model = glm::rotate(model, 180.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		FARO_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-291.0f, -2.7f, -145.5f));
+		model = glm::rotate(model, 180.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		FARO_M.RenderModel();
 		
 		glUseProgram(0);
 		mainWindow.swapBuffers();
