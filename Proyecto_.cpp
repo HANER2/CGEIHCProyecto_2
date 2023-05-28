@@ -73,6 +73,26 @@ bool		recorrido_L1 = true,
 
 bool reproducir_Lata = false;
 
+// Posiciones para Auto
+float	movAuto_x = 0.0f,
+		movAuto_z = 0.0f,
+		movAuto_y = 0.0f;
+
+int recorrido_A = 0;
+
+bool		recorrido_A1 = true,
+			recorrido_A2 = false,
+			recorrido_A3 = false,
+			recorrido_A4 = false,
+			recorrido_A5 = false,
+			recorrido_A6 = false,
+			recorrido_A7 = false,
+			recorrido_A8 = false,
+			recorrido_A9 = false;
+
+bool reproducir_Auto = true;
+
+
 //Variables para animación de nubes normales.
 float FlagForward_= true;
 float MovimientoNubeNormal_ = 0.0f;
@@ -314,7 +334,7 @@ void interpolation(void)
 void animate(void)
 {
 	
-	//Movimiento de lata
+	//------Recorrido de lata (Se inicializa y pausa con la tecla "1")
 	if (reproducir_Lata)
 	{
 		if (recorrido_L1)
@@ -491,6 +511,106 @@ void animate(void)
 				recorrido_L1 = true;
 			}
 		}
+	}
+	
+	//---------Recorrido del Auto (Con movimiento automatico)-----------
+	if (reproducir_Auto)
+	{
+		if (recorrido_A1)
+		{
+			movAuto_x += 3.5f;
+			if (movAuto_x >= 295.0f)
+			{
+				recorrido_A1 = false;
+				recorrido_A2 = true;
+			}
+		}
+		if (recorrido_A2) //m(Dx/Dz)= 1
+		{				//Angulo: Tan^-1 (1) = 45
+			movAuto_x += 3.5f;
+			movAuto_z -= 1.0f;
+			orienta = 45.0f;
+			if (movAuto_x >= 325.0f)
+			{
+				recorrido_A2 = false;
+				recorrido_A3 = true;
+			}
+		}
+
+		if (recorrido_A3) 
+		{				
+			movAuto_z -= 3.5f;
+			orienta = 90.0f;
+			if (movAuto_z <= -640.0f)
+			{
+				recorrido_A3 = false;
+				recorrido_A4 = true;
+			}
+		}
+		if (recorrido_A4) //m(Dx/Dz)= 2
+		{					//Angulo = tan^-1 (2)= 63.43 +90 = 153.43
+			movAuto_z -= 2.0f;
+			movAuto_x -= 3.5f;
+			orienta = 153.43f;
+			if (movAuto_z <= -655.0f)
+			{
+				recorrido_A4 = false;
+				recorrido_A5 = true;
+			}
+		}
+		if (recorrido_A5)
+		{
+			movAuto_x -= 3.5f;
+			orienta = 180.0f;
+			if (movAuto_x <= -310.0f)
+			{
+				recorrido_A5 = false;
+				recorrido_A6 = true;
+			}
+		}
+		if (recorrido_A6)
+		{
+			movAuto_x -= 3.5f;
+			movAuto_z += 2.0f;
+			orienta = 243.43f;
+			if (movAuto_x <= -325.0f)
+			{
+				recorrido_A6 = false;
+				recorrido_A7 = true;
+			}
+		}
+		if (recorrido_A7)
+		{
+			movAuto_z += 3.5f;
+			orienta = -90.0f;
+			if (movAuto_z >= 0.0f)
+			{
+				recorrido_A7 = false;
+				recorrido_A8 = true;
+			}
+		}
+		if (recorrido_A8)
+		{
+			movAuto_x += 3.5f;
+			movAuto_z += 2.0f;
+			orienta = -63.43;
+			if (movAuto_x <= -310.0f)
+			{
+				recorrido_A8 = false;
+				recorrido_A9 = true;
+			}
+		}
+		if (recorrido_A9)
+		{
+			movAuto_x += 3.5f;
+			orienta = 0.0f;
+			if (movAuto_x >= 0.0f)
+			{
+				recorrido_A9 = false;
+				recorrido_A1 = true;
+			}
+		}
+		
 	}
 	
 	
@@ -1014,10 +1134,10 @@ int main()
 		//-------Modelo PORSCHE.-------
 		model = glm::mat4(1.0);
 		//model = glm::translate(model, glm::vec3(0.0f, -1.0f, 100.0f));
-		model = glm::translate(model, glm::vec3(0.0f + MovimientoX_, -0.9f + MovimientoY_, 327.0f + MovimientoZ_));
+		model = glm::translate(model, glm::vec3(0.0f + movAuto_x, -0.9f + movAuto_y, 327.0f + movAuto_z));
 		model = glm::scale(model, glm::vec3(1.4f, 1.4f, 1.4f));
 		model = glm::rotate(model, -90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::rotate(model, Giro_ * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(orienta), glm::vec3(0.0f, 1.0f, 0.0f));
 		modelaux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		PORSCHE_M.RenderModel();
