@@ -73,6 +73,13 @@ bool		recorrido_L1 = true,
 
 bool reproducir_Lata = false;
 
+//Variables para animación de nubes normales.
+float FlagForward_= true;
+float MovimientoNubeNormal_ = 0.0f;
+float NubeNormalOffset_ = 0.1f;
+float Seno_ = 0.0f;
+float SenoOffset_ = 0.2f;
+
 Window mainWindow;
 std::vector<Mesh*> meshList;
 std::vector<Shader> shaderList;
@@ -108,6 +115,8 @@ Model AUTOPISTA_M;
 Model Bocina;
 //--Banca
 Model Banca;
+//-------Modelo nube normal.-------
+Model NUBE_M;
 
 Skybox skybox;
 Skybox skybox1;
@@ -586,6 +595,9 @@ int main()
 	//Banca
 	Model Banca = Model();
 	Banca.LoadModel("Models/Banca.obj");
+	//-------Modelo nube normal.-------
+	Model NUBE_M = Model();
+	NUBE_M.LoadModel("Models/Nube_.obj");
 	
 	//Skybox
 	std::vector<std::string> skyboxFaces;
@@ -871,7 +883,7 @@ int main()
 		Ring_ML.RenderModel();
 
 		//Nube voladora
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 110.0f, 0.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 20.0f, 0.0f));
 		//model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.3f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -922,7 +934,58 @@ int main()
 		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Banca.RenderModel();
-
+		
+				//-------Nube normal.-------
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-500.0f+MovimientoNubeNormal_, 300.0f+10*(sin(glm::radians(Seno_)*3)), 0.0f));
+		model = glm::scale(model, glm::vec3(15.0f, 15.0f, 15.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		NUBE_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(500.0f + MovimientoNubeNormal_, 400.0f + 10 * (sin(glm::radians(Seno_) * 3)), 0.0f));
+		model = glm::scale(model, glm::vec3(15.0f, 15.0f, 15.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		NUBE_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-500.0f + MovimientoNubeNormal_, 400.0f + 10 * (sin(glm::radians(Seno_) * 3)), 0.0f));
+		model = glm::scale(model, glm::vec3(15.0f, 15.0f, 15.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		NUBE_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(500.0f + MovimientoNubeNormal_, 900.0f + 10 * (sin(glm::radians(Seno_) * 3)), 0.0f));
+		model = glm::scale(model, glm::vec3(15.0f, 15.0f, 15.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		NUBE_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-500.0f + MovimientoNubeNormal_, 900.0f + 10 * (sin(glm::radians(Seno_) * 3)), 0.0f));
+		model = glm::scale(model, glm::vec3(15.0f, 15.0f, 15.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		NUBE_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-500.0f + MovimientoNubeNormal_, 300.0f + 10 * (sin(glm::radians(Seno_) * 3)), 800.0f));
+		model = glm::scale(model, glm::vec3(15.0f, 15.0f, 15.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		NUBE_M.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-500.0f + MovimientoNubeNormal_, 300.0f + 10 * (sin(glm::radians(Seno_) * 3)), -800.0f));
+		model = glm::scale(model, glm::vec3(15.0f, 15.0f, 15.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		NUBE_M.RenderModel();
+		//Animación de nube normal.
+		if (MovimientoNubeNormal_ < 200.0f && FlagForward_) {
+			MovimientoNubeNormal_ += NubeNormalOffset_ * deltaTime;
+		}
+		else {
+			FlagForward_ = false;
+			MovimientoNubeNormal_ -= NubeNormalOffset_ * deltaTime;
+		}
+		if (MovimientoNubeNormal_ < -200.0f) {
+			FlagForward_ = true;
+		}
+		Seno_ += SenoOffset_ * deltaTime;
+		if (SenoOffset_ > 360.0f) {
+			SenoOffset_ = 0.0f;
+		}
 
 		//-------Modelo PORSCHE.-------
 		model = glm::mat4(1.0);
