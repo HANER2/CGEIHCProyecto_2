@@ -140,6 +140,8 @@ Model NUBE_M;
 //---Modelo árboles----
 Model arbol1;
 Model arbol2;
+//-------Modelo Jake.-------
+Model JAKE_M;
 
 Skybox skybox;
 Skybox skybox1;
@@ -725,6 +727,9 @@ int main()
 	arbol1.LoadModel("Models/tree1.obj");
 	arbol2 = Model();
 	arbol2.LoadModel("Models/tree2.obj");
+	//-------Modelo Jake.-------
+	Model JAKE_M = Model();
+	JAKE_M.LoadModel("Models/Jake_2.obj");
 	
 	//Skybox
 	std::vector<std::string> skyboxFaces;
@@ -1663,6 +1668,14 @@ int main()
 		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		FARO_M.RenderModel();
+		
+		//-------Modelo Jake.-------
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-30.0f, 25.0f, 160.0f));
+		model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		JAKE_M.RenderModel();
 		
 		glUseProgram(0);
 		mainWindow.swapBuffers();
