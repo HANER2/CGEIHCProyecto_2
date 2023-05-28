@@ -1,0 +1,182 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 27.05.2023 17:20:43
+
+newmtl Material__53
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+	map_Kd C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+
+newmtl Material__54
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\Faro_Glass.jpg
+	map_Kd C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\Faro_Glass.jpg
+
+newmtl Material__55
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+	map_Kd C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+
+newmtl Material__43
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+	map_Kd C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+
+newmtl Material__44
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+	map_Kd C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+
+newmtl Material__45
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+	map_Kd C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+
+newmtl Material__48
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+	map_Kd C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+
+newmtl Material__46
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+	map_Kd C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+
+newmtl Material__52
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+	map_Kd C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+
+newmtl Material__51
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+	map_Kd C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+
+newmtl Material__50
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+	map_Kd C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+
+newmtl Material__49
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+	map_Kd C:\Users\Andrew Haner\Downloads\CGEIHCProyecto_2-main\Textures\PORSCHE_3.png
+
+newmtl Faro_1_Faro__light_bulb
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.9961 0.9412 0.6392
+	Kd 0.9961 0.9412 0.6392
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.9961 0.9412 0.5686
