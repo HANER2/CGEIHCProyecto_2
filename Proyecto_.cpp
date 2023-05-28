@@ -540,7 +540,7 @@ int main()
 	//Definimos nuestras variables con las que se hará el ciclo de día y noche
 	movySun = -1.0f; //Aquí la luz siempre va a iniciar apunto a -1 en Y 
 	movSun = -1.0f;
-	movSunOffset = 0.0002f; //Declaramos el tiempo en el que queremos que vaya avanzando la luz
+	movSunOffset = 0.0010f; //Declaramos el tiempo en el que queremos que vaya avanzando la luz. Luz de día dura 15 segundos.
 	luz = 1.0f;
 	dia = true;
 	
