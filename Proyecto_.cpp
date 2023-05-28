@@ -266,7 +266,6 @@ void CreateShaders()
 //Variables animación.
 float Rotate_ = 0.0f;
 float RotateOffset_ = 4.0f;
-bool FlagForward_;
 float reproduciranimacion, habilitaranimacion,
 guardoFrame, reinicioFrame, contador = 0;
 bool animacion = false;
