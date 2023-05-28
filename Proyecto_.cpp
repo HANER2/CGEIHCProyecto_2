@@ -106,6 +106,8 @@ Model Nube_Goku;
 Model AUTOPISTA_M;
 //---Bocina
 Model Bocina;
+//--Banca
+Model Banca;
 
 Skybox skybox;
 Skybox skybox1;
@@ -581,7 +583,9 @@ int main()
 	//Bocina
 	Model Bocina = Model();
 	Bocina.LoadModel("Models/Bocina.obj");
-	
+	//Banca
+	Model Banca = Model();
+	Banca.LoadModel("Models/Banca.obj");
 	
 	//Skybox
 	std::vector<std::string> skyboxFaces;
@@ -879,6 +883,45 @@ int main()
 		model = glm::scale(model, glm::vec3(1.5f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Bocina.RenderModel();
+		
+		//Banca1
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(190.0f, -2.0f, 280.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Banca.RenderModel();
+		//Banca2
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-190.0f, -2.0f, 280.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Banca.RenderModel();
+		//Banca3
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(190.0f, -2.0f, -280.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Banca.RenderModel();
+		//Banca4
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-190.0f, -2.0f, -280.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Banca.RenderModel();
+		//Banca5
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(280.0f, -2.0f, 190.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Banca.RenderModel();
+		//Banca6
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(280.0f, -2.0f, -190.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Banca.RenderModel();
+		//Banca7
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-280.0f, -2.0f, 190.0f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Banca.RenderModel();
+		//Banca8
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-280.0f, -2.0f, -190.0f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Banca.RenderModel();
 
 
 		//-------Modelo PORSCHE.-------
