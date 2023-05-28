@@ -400,6 +400,13 @@ int main()
 		1.0f, 0.0f, -1.0f);
 	//contador de luces puntuales
 	unsigned int pointLightCount = 0;
+	//-------Luz de faro.-------
+	pointLights[0] = PointLight(0.0f, 0.0f, 1.0f,//Color: Azul.
+		170.0f, 1.0f,//Expande. Concentra.
+		315.0f, 0.0f, 315.0f,//Posición.
+		0.3f, 0.2f, 0.1f);
+	pointLightCount++;
+	
 	unsigned int spotLightCount = 0;
 	/*
 	//linterna
@@ -418,14 +425,6 @@ int main()
 		1.0f, -5.0f, 0.0f,//Profundidad normal.
 		1.0f, 0.0f, 0.0f,//Cercanía.
 		50.0f);//Ancho.
-	spotLightCount++;
-	//-------Luz faro público.-------
-	spotLights[1] = SpotLight(1.0f, 0.0f, 1.0f,//Color: Magenta.
-		0.5f, 1.0f,//Concentración.
-		0.0f, 5.0f, 50.2f,//Posición normal.
-		0.0f, -5.0f, 0.0f,//Profundidad normal.
-		1.0f, 0.0f, 0.0f,//Cercanía.
-		89.0f);//Ancho.
 	spotLightCount++;
 
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
