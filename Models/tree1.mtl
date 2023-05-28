@@ -1,0 +1,23 @@
+# Blender 3.3.1 MTL File: 'trees1.blend'
+# www.blender.org
+
+newmtl bark
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd bark_baseColor.png
+map_Bump -bm 1.000000 bark_normal.png
+
+newmtl leaves
+Ns 102.336571
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd leaves_baseColor.png
+map_d leaves_baseColor.png
