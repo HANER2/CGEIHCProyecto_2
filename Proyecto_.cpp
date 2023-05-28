@@ -628,9 +628,10 @@ int main()
 	mainLight = DirectionalLight(1.0f, 1.0f, 1.0f,
 		0.5f, 0.3f,
 		1.0f, 0.0f, -1.0f);
+	
 	//contador de luces puntuales
 	unsigned int pointLightCount = 0;
-	//-------Luz de faro.-------
+	//-------Luz de faro superior derecho.-------
 	pointLights[0] = PointLight(0.0f, 0.0f, 1.0f,//Color: Azul.
 		5.0f, 0.0f,//Expande. Concentra.
 		315.0f, 0.0f, 315.0f,//Posición.
@@ -650,13 +651,37 @@ int main()
 	*/
 	//-------Luz de esfera del dragón.-------
 	spotLights[0] = SpotLight(1.0f, 0.4f, 0.0f,//Color: Naranja.
-		0.5f, 1.0f,//Concentración.
+		10.0f, 10.0f,//Profundidad.
 		-2.0f, 5.0f, -50.2f,//Posición normal.
-		1.0f, -5.0f, 0.0f,//Profundidad normal.
-		1.0f, 0.0f, 0.0f,//Cercanía.
-		50.0f);//Ancho.
+		0.0f, -5.0f, 0.0f,//Dirección de profundidad.
+		2.0f, 0.0f, 0.0f,//Cercanía.
+		70.0f);//Ancho.
 	spotLightCount++;
-
+	//-------Luz de faro superior izquierdo.-------
+	spotLights[1] = SpotLight(0.0f, 0.0f, 1.0f,//Color: Azul.
+		10.0f, 10.0f,//Profundidad.
+		315.0f, 5.0f, -315.0f,//Posición normal.
+		0.0f, -5.0f, 0.0f,//Dirección de profundidad.
+		2.0f, 0.0f, 0.0f,//Cercanía.
+		90.0f);//Ancho.
+	spotLightCount++;
+	//-------Luz de faro inferior izquierdo.-------
+	spotLights[2] = SpotLight(0.0f, 0.0f, 1.0f,//Color: Azul.
+		10.0f, 10.0f,//Profundidad.
+		-315.0f, 5.0f, -315.0f,//Posición normal.
+		0.0f, -5.0f, 0.0f,//Dirección de profundidad.
+		2.0f, 0.0f, 0.0f,//Cercanía.
+		90.0f);//Ancho.
+	spotLightCount++;
+	//-------Luz de faro inferior derecho.-------
+	spotLights[3] = SpotLight(0.0f, 0.0f, 1.0f,//Color: Azul.
+		10.0f, 10.0f,//Profundidad.
+		-315.0f, 5.0f, 315.0f,//Posición normal.
+		0.0f, -5.0f, 0.0f,//Dirección de profundidad.
+		2.0f, 0.0f, 0.0f,//Cercanía.
+		90.0f);//Ancho.
+	spotLightCount++;
+	
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
 		uniformSpecularIntensity = 0, uniformShininess = 0, uniformTextureOffset=0;
 	GLuint uniformColor = 0;
