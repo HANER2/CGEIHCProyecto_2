@@ -877,9 +877,9 @@ int main()
 		meshList[2]->RenderMesh();
 		
 		//Modelo ----Casa de Kaiosama--------
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-120.0f, -2.0f, -85.0f)); //ubicación del modelo
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-150.0f, -2.0f, -110.0f)); //ubicación del modelo
 		model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(1.15f));
+		model = glm::scale(model, glm::vec3(1.8f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Casa_Kaio.RenderModel();
 
@@ -900,9 +900,9 @@ int main()
 		Lata.RenderModel();
 
 		//Ring ML
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-100.0f, -2.0f, 120.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-150.0f, -2.0f, 160.0f));
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(1.15f));
+		model = glm::scale(model, glm::vec3(1.7f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Ring_ML.RenderModel();
 
