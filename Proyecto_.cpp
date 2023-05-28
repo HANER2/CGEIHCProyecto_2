@@ -4,7 +4,7 @@
 * Computación gráfica e interacción humano-computadora.
 * Grupo: 6.
 * Proyecto.
-* Alumnos: Juan Andrés Cruz Romero.
+* Alumnos: 	Juan Andrés Cruz Romero.
 *		   Alexis Rafael del Valle Aragón.
 *		   Barulio Mauricio Blancas Galicia.//
 */
@@ -44,6 +44,34 @@ float movySun;
 float movSunOffset;
 float luz;
 bool dia;
+
+// Posiciones para Lata
+float	movLata_x = 0.0f,
+movLata_z = 0.0f,
+movLata_y = 0.0f,
+orienta = 0.0f;
+
+int recorrido_L = 0;
+
+bool		recorrido_L1 = true,
+		recorrido_L2 = false,
+		recorrido_L3 = false,
+		recorrido_L4 = false,
+		recorrido_L5 = false,
+		recorrido_L6 = false,
+		recorrido_L7 = false,
+		recorrido_L8 = false,
+		recorrido_L9 = false,
+		recorrido_L10 = false,
+		recorrido_L11 = false,
+		recorrido_L12 = false,
+		recorrido_L13 = false,
+		recorrido_L14 = false,
+		recorrido_L15 = false,
+		recorrido_L16 = false,
+		recorrido_L17 = false;
+
+bool reproducir_Lata = false;
 
 Window mainWindow;
 std::vector<Mesh*> meshList;
@@ -273,6 +301,187 @@ void interpolation(void)
 
 void animate(void)
 {
+	
+	//Movimiento de lata
+	if (reproducir_Lata)
+	{
+		if (recorrido_L1)
+		{
+			movLata_z += 0.5f;
+			if (movLata_z >= 10.0f)
+			{
+				recorrido_L1 = false;
+				recorrido_L2 = true;
+			}
+
+		}
+		if (recorrido_L2) //m(Dy/Dz)= -1.16
+		{
+			movLata_y -= 0.58f;
+			movLata_z += 0.5f;
+
+			if (movLata_y <= -3.5f)
+			{
+				recorrido_L2 = false;
+				recorrido_L3 = true;
+			}
+		}
+
+		if (recorrido_L3) //m(Dy/Dz)= -2.5
+		{
+			movLata_y -= 1.125f;
+			movLata_z += 0.5f;
+
+			if (movLata_y <= -8.0f)
+			{
+				recorrido_L3 = false;
+				recorrido_L4 = true;
+			}
+		}
+		
+		if (recorrido_L4) //m(Dy/Dz)= 1.33
+		{
+			movLata_y += 0.665f;
+			movLata_z += 0.5f;
+
+			if (movLata_z >= 16.5f)
+			{
+				recorrido_L4 = false;
+				recorrido_L5 = true;
+			}
+		}
+		if (recorrido_L5) //m(Dy/Dz)= 1.33
+		{
+			movLata_y += 0.665f;
+			movLata_z += 0.5f;
+
+			if (movLata_z >= 18.0f)
+			{
+				recorrido_L5 = false;
+				recorrido_L6 = true;
+			}
+		}
+		if (recorrido_L6) //m(Dy/Dz)= 1
+		{
+			movLata_y += 0.5f;
+			movLata_z += 0.5f;
+
+			if (movLata_z >= 20.0f)
+			{
+				recorrido_L6 = false;
+				recorrido_L7 = true;
+			}
+		}
+		if (recorrido_L7) //m(Dy/Dz)= -1
+		{
+			movLata_y -= 0.5f;
+			movLata_z += 0.5f;
+
+			if (movLata_z >= 22.0f)
+			{
+				recorrido_L7 = false;
+				recorrido_L8 = true;
+			}
+		}
+		if (recorrido_L8) //m(Dy/Dz)= -1.33
+		{
+			movLata_y -= 0.665f;
+			movLata_z += 0.5f;
+
+			if (movLata_z >= 23.5f)
+			{
+				recorrido_L8 = false;
+				recorrido_L9 = true;
+			}
+		}
+		if (recorrido_L9) //m(Dy/Dz)= -1.33
+		{
+			movLata_y -= 0.665f;
+			movLata_z += 0.5f;
+
+			if (movLata_y <= -8.0f)
+			{
+				recorrido_L9 = false;
+				recorrido_L10 = true;
+			}
+		}
+		if (recorrido_L10) //m(Dy/Dz)= 0.75
+		{
+			movLata_y += 0.375f;
+			movLata_z += 0.5f;
+
+			if (movLata_z >= -8.0f)
+			{
+				recorrido_L10 = false;
+				recorrido_L11 = true;
+			}
+		}
+		if (recorrido_L11) //m(Dy/Dz)= 0.833
+		{
+			movLata_y += 0.4165f;
+			movLata_z += 0.5f;
+
+			if (movLata_z >= 30.0f)
+			{
+				recorrido_L11 = false;
+				recorrido_L12 = true;
+			}
+		}
+		if (recorrido_L12) //m(Dy/Dz)= -0.75
+		{
+			movLata_y -= 0.375f;
+			movLata_z += 0.5f;
+
+			if (movLata_z >= 33.5f)
+			{
+				recorrido_L12 = false;
+				recorrido_L13 = true;
+			}
+		}
+		if (recorrido_L13) //m(Dy/Dz)= -0.833
+		{
+			movLata_y -= 0.4165f;
+			movLata_z += 0.5f;
+
+			if (movLata_z >= 35.0f)
+			{
+				recorrido_L13 = false;
+				recorrido_L14 = true;
+			}
+		}
+		if (recorrido_L14)  
+		{
+			movLata_y -= 0.5f;
+
+			if (movLata_y <= -15.0f)
+			{
+				recorrido_L14 = false;
+				recorrido_L15 = true;
+			}
+		}
+		if (recorrido_L15) 
+		{
+			movLata_z -= 0.5f;
+
+			if (movLata_z <= 0.5f)
+			{
+				recorrido_L15 = false;
+				recorrido_L16 = true;
+			}
+		}
+		if (recorrido_L16)
+		{
+			movLata_y += 0.5f;
+
+			if (movLata_y >= 0.5f)
+			{
+				recorrido_L16 = false;
+				recorrido_L1 = true;
+			}
+		}
+	}
+	
+	
 	if (play)
 	{
 		if (i_curr_steps >= i_max_steps)
@@ -573,22 +782,7 @@ int main()
 		// Clear the window
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
-		//--------------Alternar Skybox-----------
-		/*while (true)
-		{
-
 		skybox.DrawSkybox(camera.calculateViewMatrix(), projection);
-
-		std::this_thread::sleep_for(std::chrono::seconds(20)); // Esperar 20 segundos
-
-		skybox2.DrawSkybox(camera.calculateViewMatrix(), projection); // Ejecutar skybox de noche
-
-		std::this_thread::sleep_for(std::chrono::seconds(20)); // Esperar 20 segundos
-		}
-		*/
-		skybox.DrawSkybox(camera.calculateViewMatrix(), projection);
-
 		shaderList[0].UseShader();
 		uniformModel = shaderList[0].GetModelLocation();
 		uniformProjection = shaderList[0].GetProjectionLocation();
@@ -652,8 +846,9 @@ int main()
 
 		//Lata
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(2.0f, 7.0f, 4.5f));
+		model = glm::translate(model, glm::vec3(2.0f + movLata_x, 7.0f + movLata_y, 4.5f + movLata_z));
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(orienta), glm::vec3(0.0f, 0.0f, 1.0f));
 		model = glm::scale(model, glm::vec3(0.8f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Lata.RenderModel();
@@ -1163,5 +1358,11 @@ void inputKeyframes(bool* keys)
 		{
 			reproduciranimacion = 0;
 		}
+	}
+	
+	//Tecla para recorrido y pausa de la lata (1)
+	if (keys[GLFW_KEY_1])
+	{
+		reproducir_Lata = !reproducir_Lata;
 	}
 }
