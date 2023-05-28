@@ -143,6 +143,13 @@ Model arbol2;
 //-------Modelo Jake.-------
 Model JAKE_M;
 
+//-------Frijolito------
+Model Frijolito_Torso;
+Model Frijolito_BrazoDer;
+Model Frijolito_BrazoIzq;
+Model Frijolito_PiernaDer;
+Model Frijolito_PiernaIzq;
+
 Skybox skybox;
 Skybox skybox1;
 Skybox skybox2;
@@ -299,9 +306,29 @@ float MovimientoX_ = 0.0f, MovimientoY_ = 0.0f, MovimientoZ_ = 0.0f;//Movimiento
 float Giro_ = 0;
 float Ciclo_, Ciclo_1;
 
+//----Para el keyframe
+// //Keyframes (Manipulación y dibujo)
+float	posX = 0.0f,
+		posY = 0.0f,
+		posZ = 0.0f,
+		rotRodIzq = 0.0f,
+		giroMonito = 0.0f,
+		movBrazoDer = 0.0f,
+		rotRodDer = 0.0f,
+		movBrazoIzq = 0.0f;
+
+float	incX = 0.0f,
+		incY = 0.0f,
+		incZ = 0.0f,
+		rotInc = 0.0f,
+		giroMonitoInc = 0.0f,
+		incBrazoDer = 0.0f,
+		incRodDer = 0.0f,
+		incBrazoIzq = 0.0f;
+
 #define MAX_FRAMES 9000
 int i_max_steps = 70;//Más pasos más lentitud.
-int i_curr_steps = 33;//Número máximo de frames de la animación actual.
+int i_curr_steps = 35;//Número máximo de frames de la animación actual.
 typedef struct _frame
 {
 	//Variables para guardar movimiento en keyframes.
@@ -313,10 +340,19 @@ typedef struct _frame
 	float MovimientoZInc_;
 	float Giro_;
 	float GiroInc_;
+	
+	float posX;		//Variable para PosicionX
+	float posY;		//Variable para PosicionY
+	float posZ;		//Variable para PosicionZ
+	float rotRodIzq;
+	float giroMonito;
+	float movBrazoDer;
+	float rotRodDer;
+	float movBrazoIzq;
 }FRAME;
 
 FRAME KeyFrame[MAX_FRAMES];
-int FrameIndex = 33;//Número máximo de frames de la animación actual.
+int FrameIndex = 35;//Número máximo de frames de la animación actual.
 bool play = false;
 int playIndex = 0;
 
@@ -326,6 +362,17 @@ void resetElements(void)
 	MovimientoY_ = KeyFrame[0].MovimientoY_;
 	MovimientoZ_ = KeyFrame[0].MovimientoZ_;
 	Giro_ = KeyFrame[0].Giro_;
+	
+	posX = KeyFrame[0].posX;
+	posY = KeyFrame[0].posY;
+	posZ = KeyFrame[0].posZ;
+
+	rotRodIzq = KeyFrame[0].rotRodIzq;
+	giroMonito = KeyFrame[0].giroMonito;
+
+	movBrazoDer = KeyFrame[0].movBrazoDer;
+	movBrazoIzq = KeyFrame[0].movBrazoIzq;
+	rotRodDer = KeyFrame[0].rotRodDer;
 }
 
 void interpolation(void)
@@ -334,6 +381,16 @@ void interpolation(void)
 	KeyFrame[playIndex].MovimientoYInc_ = (KeyFrame[playIndex + 1].MovimientoY_ - KeyFrame[playIndex].MovimientoY_) / i_max_steps;
 	KeyFrame[playIndex].MovimientoZInc_ = (KeyFrame[playIndex + 1].MovimientoZ_ - KeyFrame[playIndex].MovimientoZ_) / i_max_steps;
 	KeyFrame[playIndex].GiroInc_ = (KeyFrame[playIndex + 1].Giro_ - KeyFrame[playIndex].Giro_) / i_max_steps;
+	
+	incX = (KeyFrame[playIndex + 1].posX - KeyFrame[playIndex].posX) / i_max_steps;
+	incY = (KeyFrame[playIndex + 1].posY - KeyFrame[playIndex].posY) / i_max_steps;
+	incZ = (KeyFrame[playIndex + 1].posZ - KeyFrame[playIndex].posZ) / i_max_steps;
+	rotInc = (KeyFrame[playIndex + 1].rotRodIzq - KeyFrame[playIndex].rotRodIzq) / i_max_steps;
+	giroMonitoInc = (KeyFrame[playIndex + 1].giroMonito - KeyFrame[playIndex].giroMonito) / i_max_steps;
+	//playIndex +1 >> Valor final
+	incBrazoDer = (KeyFrame[playIndex + 1].movBrazoDer - KeyFrame[playIndex].movBrazoDer) / i_max_steps;
+	incBrazoIzq = (KeyFrame[playIndex + 1].movBrazoIzq - KeyFrame[playIndex].movBrazoIzq) / i_max_steps;
+	incRodDer = (KeyFrame[playIndex + 1].rotRodDer - KeyFrame[playIndex].rotRodDer) / i_max_steps;
 }
 
 void animate(void)
@@ -624,38 +681,31 @@ void animate(void)
 		if (i_curr_steps >= i_max_steps)
 		{
 			playIndex++;
-			printf("\n--------------------------------------------------");
-			printf("\nFrame en reproduccion(playindex): %d.", playIndex);
-
-			printf("\nKeyFrame[%d].MovimientoX_= %ff;", playIndex, MovimientoX_);
-			printf("\nKeyFrame[%d].MovimientoY_= %ff;", playIndex, MovimientoY_);
-			printf("\nKeyFrame[%d].MovimientoZ_= %ff;", playIndex, MovimientoZ_);
-			printf("\nKeyFrame[%d].Giro_= %ff;\n", playIndex, Giro_);
-			printf("\n--------------------------------------------------");
-
 			if (playIndex > FrameIndex - 2)
 			{
-				printf("\n--------------------------------------------------");
-				printf("\nNumero de frames finales(Frame index)= %d.", FrameIndex);
-				printf("\nFin de animacion.\n");
-				printf("\n0 para resetear animacion y espacio para reproducirla.");
-				printf("\n--------------------------------------------------");
+				std::cout << "Animation ended" << std::endl;
 				playIndex = 0;
 				play = false;
 			}
-			else //Next frame interpolations
+			else
 			{
-				i_curr_steps = 0; //Reset counter
-				//Interpolation
+				i_curr_steps = 0;
 				interpolation();
 			}
 		}
 		else
 		{
-			MovimientoX_ += KeyFrame[playIndex].MovimientoXInc_;
-			MovimientoY_ += KeyFrame[playIndex].MovimientoYInc_;
-			MovimientoZ_ += KeyFrame[playIndex].MovimientoZInc_;
-			Giro_ += KeyFrame[playIndex].GiroInc_;
+			posX += incX;
+			posY += incY;
+			posZ += incZ;
+
+			rotRodIzq += rotInc;
+			giroMonito += giroMonitoInc;
+
+			movBrazoDer += incBrazoDer;
+			movBrazoIzq += incBrazoIzq;
+			rotRodDer += incRodDer;
+
 			i_curr_steps++;
 		}
 
@@ -730,6 +780,18 @@ int main()
 	//-------Modelo Jake.-------
 	Model JAKE_M = Model();
 	JAKE_M.LoadModel("Models/Jake_2.obj");
+	
+	//-----Frijolito---------
+	Model Frijolito_Torso = Model();
+	Frijolito_Torso.LoadModel("Models/Frijolito_Torso.obj");
+	Model Frijolito_BrazoDer = Model();
+	Frijolito_BrazoDer.LoadModel("Models/Frijolito_BrazoDer.obj");
+	Model Frijolito_BrazoIzq = Model();
+	Frijolito_BrazoIzq.LoadModel("Models/Frijolito_BrazoIzq.obj");
+	Model Frijolito_PiernaDer = Model();
+	Frijolito_PiernaDer.LoadModel("Models/Frijolito_PiernaDer.obj");
+	Model Frijolito_PiernaIzq = Model();
+	Frijolito_PiernaIzq.LoadModel("Models/Frijolito_PiernaIzq.obj");
 	
 	//Skybox
 	std::vector<std::string> skyboxFaces;
@@ -821,85 +883,105 @@ int main()
 	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 1000.0f);
 	
 	//-------Animación keyframes.-------.
-	KeyFrame[0].MovimientoX_ = 0.000000f;
-	KeyFrame[0].MovimientoY_ = 0.000000f;
-	KeyFrame[0].MovimientoZ_ = 0.000000f;
-	KeyFrame[0].Giro_ = 0.000000f;
+	//-------Animación keyframes.-------.
+	KeyFrame[0].posX = 0.0f;
+	KeyFrame[0].posY = 0.0f;
+	KeyFrame[0].posZ = 0.0f;
+	KeyFrame[0].rotRodIzq = 0.0f;
+	KeyFrame[0].giroMonito = 0.0f;
+	KeyFrame[0].movBrazoDer = 0.0f;
+	KeyFrame[0].rotRodDer = 0.0f;
+	KeyFrame[0].movBrazoIzq = 0.0f;
 
-	KeyFrame[1].MovimientoX_ = 0.000000f;
-	KeyFrame[1].MovimientoY_ = 4.000000f;
-	KeyFrame[1].MovimientoZ_ = 0.000000f;
-	KeyFrame[1].Giro_ = 0.000000f;
+	KeyFrame[1].posX = 0.0f;
+	KeyFrame[1].posY = 0.0f;
+	KeyFrame[1].posZ = 20.0f;
+	KeyFrame[1].rotRodIzq = -20.0f;
+	KeyFrame[1].giroMonito = 0.0f;
+	KeyFrame[1].movBrazoDer = -15.0f;
+	KeyFrame[1].rotRodDer = 20.0f;
+	KeyFrame[1].movBrazoIzq = 15.0f;
 
-	KeyFrame[2].MovimientoX_ = 8.000000f;
-	KeyFrame[2].MovimientoY_ = 0.000000f;
-	KeyFrame[2].MovimientoZ_ = 0.000000f;
-	KeyFrame[2].Giro_ = 0.000000f;
+	KeyFrame[2].posX = 0.0f;
+	KeyFrame[2].posY = 0.0f;
+	KeyFrame[2].posZ = 40.0f;
+	KeyFrame[2].rotRodIzq = 20.0f;
+	KeyFrame[2].giroMonito = 0.0f;
+	KeyFrame[2].movBrazoDer = 15.0f;
+	KeyFrame[2].rotRodDer = -20.0f;
+	KeyFrame[2].movBrazoIzq = -15.0f;
 
-	KeyFrame[3].MovimientoX_ = 16.000000f;
-	KeyFrame[3].MovimientoY_ = -4.000000f;
-	KeyFrame[3].MovimientoZ_ = 0.000000f;
-	KeyFrame[3].Giro_ = 0.000000f;
+	KeyFrame[3].posX = 0.0f;
+	KeyFrame[3].posY = 0.0f;
+	KeyFrame[3].posZ = 60.0f;
+	KeyFrame[3].rotRodIzq = 0.0f;
+	KeyFrame[3].giroMonito = 0.0f;
+	KeyFrame[3].movBrazoDer = -15.0f;
+	KeyFrame[3].rotRodDer = 0.0f;
+	KeyFrame[3].movBrazoIzq = 15.0f;
 
-	KeyFrame[4].MovimientoX_ = 24.000000f;
-	KeyFrame[4].MovimientoY_ = 0.000000f;
-	KeyFrame[4].MovimientoZ_ = 0.000000f;
-	KeyFrame[4].Giro_ = 0.000000f;
+	KeyFrame[4].posX = 0.0f;
+	KeyFrame[4].posY = 0.0f;
+	KeyFrame[4].posZ = 80.0f;
+	KeyFrame[4].rotRodIzq = -20.0f;
+	KeyFrame[4].giroMonito = 0.0f;
+	KeyFrame[4].movBrazoDer = -15.0f;
+	KeyFrame[4].rotRodDer = 20.0f;
+	KeyFrame[4].movBrazoIzq = 15.0f;
 
-	KeyFrame[5].MovimientoX_ = 32.000000f;
-	KeyFrame[5].MovimientoY_ = 4.000000f;
-	KeyFrame[5].MovimientoZ_ = 0.000000f;
-	KeyFrame[5].Giro_ = 0.000000f;
+	KeyFrame[5].posX = 0.0f;
+	KeyFrame[5].posY = 0.0f;
+	KeyFrame[5].posZ = 100.0f;
+	KeyFrame[5].rotRodIzq = 20.0f;
+	KeyFrame[5].giroMonito = 0.0f;
+	KeyFrame[5].movBrazoDer = 15.0f;
+	KeyFrame[5].rotRodDer = -20.0f;
+	KeyFrame[5].movBrazoIzq = -15.0f;
 
-	KeyFrame[6].MovimientoX_ = 40.000000f;
-	KeyFrame[6].MovimientoY_ = 0.000000f;
-	KeyFrame[6].MovimientoZ_ = 0.000000f;
-	KeyFrame[6].Giro_ = 0.000000f;
+	KeyFrame[6].posX = 0.0f;
+	KeyFrame[6].posY = 0.0f;
+	KeyFrame[6].posZ = 100.0f;
+	KeyFrame[6].rotRodIzq = 0.0f;
+	KeyFrame[6].giroMonito = -90.0f;
+	KeyFrame[6].movBrazoDer = 0.0f;
+	KeyFrame[6].rotRodDer = 0.0f;
+	KeyFrame[6].movBrazoIzq = 0.0f;
 
-	KeyFrame[7].MovimientoX_ = 48.000000f;
-	KeyFrame[7].MovimientoY_ = -4.000000f;
-	KeyFrame[7].MovimientoZ_ = 0.000000f;
-	KeyFrame[7].Giro_ = 0.000000f;
+	KeyFrame[7].posX = -20.0f;
+	KeyFrame[7].posY = 0.0f;
+	KeyFrame[7].posZ = 100.0f;
+	KeyFrame[7].rotRodIzq = -20.0f;
+	KeyFrame[7].giroMonito = -90.0f;
+	KeyFrame[7].movBrazoDer = -15.0f;
+	KeyFrame[7].rotRodDer = 20.0f;
+	KeyFrame[7].movBrazoIzq = 15.0f;
 
-	KeyFrame[8].MovimientoX_ = 56.000000f;
-	KeyFrame[8].MovimientoY_ = 0.000000f;
-	KeyFrame[8].MovimientoZ_ = 0.000000f;
-	KeyFrame[8].Giro_ = 0.000000f;
+	KeyFrame[8].posX = -40.0f;
+	KeyFrame[8].posY = 0.0f;
+	KeyFrame[8].posZ = 100.0f;
+	KeyFrame[8].rotRodIzq = 20.0f;
+	KeyFrame[8].giroMonito = -90.0f;
+	KeyFrame[8].movBrazoDer = 15.0f;
+	KeyFrame[8].rotRodDer = -20.0f;
+	KeyFrame[8].movBrazoIzq = -15.0f;
 
-	KeyFrame[9].MovimientoX_ = 64.000000f;
-	KeyFrame[9].MovimientoY_ = 4.000000f;
-	KeyFrame[9].MovimientoZ_ = 0.000000f;
-	KeyFrame[9].Giro_ = 0.000000f;
+	KeyFrame[9].posX = -60.0f;
+	KeyFrame[9].posY = 0.0f;
+	KeyFrame[9].posZ = 100.0f;
+	KeyFrame[9].rotRodIzq = 0.0f;
+	KeyFrame[9].giroMonito = -90.0f;
+	KeyFrame[9].movBrazoDer = 0.0f;
+	KeyFrame[9].rotRodDer = 0.0f;
+	KeyFrame[9].movBrazoIzq = 0.0f;
 
-	KeyFrame[10].MovimientoX_ = 72.000000f;
-	KeyFrame[10].MovimientoY_ = 0.000000f;
-	KeyFrame[10].MovimientoZ_ = 0.000000f;
-	KeyFrame[10].Giro_ = 0.000000f;
-
-	KeyFrame[11].MovimientoX_ = 80.000000f;
-	KeyFrame[11].MovimientoY_ = -4.000000f;
-	KeyFrame[11].MovimientoZ_ = 0.000000f;
-	KeyFrame[11].Giro_ = 0.000000f;
-
-	KeyFrame[12].MovimientoX_ = 88.000000f;
-	KeyFrame[12].MovimientoY_ = 0.000000f;
-	KeyFrame[12].MovimientoZ_ = 0.000000f;
-	KeyFrame[12].Giro_ = 0.000000f;
-
-	KeyFrame[13].MovimientoX_ = 96.000000f;
-	KeyFrame[13].MovimientoY_ = 4.000000f;
-	KeyFrame[13].MovimientoZ_ = 0.000000f;
-	KeyFrame[13].Giro_ = 0.000000f;
-
-	KeyFrame[14].MovimientoX_ = 104.000000f;
-	KeyFrame[14].MovimientoY_ = 0.000000f;
-	KeyFrame[14].MovimientoZ_ = 0.000000f;
-	KeyFrame[14].Giro_ = 0.000000f;
-
-	KeyFrame[15].MovimientoX_ = 112.000000f;
-	KeyFrame[15].MovimientoY_ = 0.000000f;
-	KeyFrame[15].MovimientoZ_ = 0.000000f;
-	KeyFrame[15].Giro_ = 0.000000f;
+	KeyFrame[10].posX = -60.0f;
+	KeyFrame[10].posY = 0.0f;
+	KeyFrame[10].posZ = 100.0f;
+	KeyFrame[10].rotRodIzq = 0.0f;
+	KeyFrame[10].giroMonito = 0.0f;
+	KeyFrame[10].movBrazoDer = 0.0f;
+	KeyFrame[10].rotRodDer = 0.0f;
+	KeyFrame[10].movBrazoIzq = 0.0f;
 
 	GLfloat now = glfwGetTime();
 	deltaTime = now - lastTime;
@@ -1143,6 +1225,48 @@ int main()
 		if (SenoOffset_ > 360.0f) {
 			SenoOffset_ = 0.0f;
 		}
+		
+		//----------Frijolito--------------------
+		//Torso
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(0, -2, 0));
+		model = glm::translate(model, glm::vec3(posX, posY, posZ));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(giroMonito), glm::vec3(0.0f, 1.0f, 0.0));
+		modelaux = model;
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Frijolito_Torso.RenderModel();
+
+		//Brazo derecho
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(-0.50f, 2.5f, 0));
+		model = glm::rotate(model, glm::radians(movBrazoDer), glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Frijolito_BrazoDer.RenderModel();
+
+		//Brazo izquierdo
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.50f, 2.5f, 0));
+		model = glm::rotate(model, glm::radians(movBrazoIzq), glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Frijolito_BrazoIzq.RenderModel();
+
+		//Pierna derecha
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-0.5f, 0.0f, -0.1f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0));
+		model = glm::rotate(model, glm::radians(rotRodDer), glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Frijolito_PiernaDer.RenderModel();
+
+		//Pierna izquierda
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(0.5f, 0.0f, -0.1f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(rotRodIzq), glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Frijolito_PiernaIzq.RenderModel();
 
 		//-------Modelo PORSCHE.-------
 		model = glm::mat4(1.0);
@@ -1692,18 +1816,19 @@ void inputKeyframes(bool* keys)
 		{
 			if (play == false && (FrameIndex > 1))
 			{
+				std::cout << "Play animation" << std::endl;
 				resetElements();
 				//First Interpolation				
 				interpolation();
+
 				play = true;
 				playIndex = 0;
 				i_curr_steps = 0;
-				reproduciranimacion++;
-				habilitaranimacion = 0;
 			}
 			else
 			{
 				play = false;
+				std::cout << "Not enough Key Frames" << std::endl;
 			}
 		}
 	}
