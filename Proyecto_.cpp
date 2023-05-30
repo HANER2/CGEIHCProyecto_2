@@ -92,6 +92,13 @@ bool		recorrido_A1 = true,
 
 bool reproducir_Auto = true;
 
+//Posicion de nube voladora inicial
+glm::vec3 Posicion_Nube(-50.0f, 100.0f, -50.0f);
+float	PosVariable = 0.0f,
+		Rotacion_Nube = 0.0;
+
+//Posicion Jake
+glm::vec3 Posicion_Jake(-60.0f, 125.0f, -50.0f);
 
 //Variables para animación de nubes normales.
 float FlagForward_= true;
@@ -402,6 +409,7 @@ void animate(void)
 		if (recorrido_L1)
 		{
 			movLata_z += 0.5f;
+
 			if (movLata_z >= 10.0f)
 			{
 				recorrido_L1 = false;
@@ -587,11 +595,11 @@ void animate(void)
 				recorrido_A2 = true;
 			}
 		}
-		if (recorrido_A2) //m(Dx/Dz)= 1
-		{				//Angulo: Tan^-1 (1) = 45
+		if (recorrido_A2) //m(Dx/Dz)= -0.8
+		{				//Angulo: Tan^-1 (1.25) = 51.34
 			movAuto_x += 3.5f;
-			movAuto_z -= 1.0f;
-			orienta = 45.0f;
+			movAuto_z -= 2.8f;
+			orienta = 51.34f;
 			if (movAuto_x >= 325.0f)
 			{
 				recorrido_A2 = false;
@@ -645,18 +653,18 @@ void animate(void)
 		{
 			movAuto_z += 3.5f;
 			orienta = -90.0f;
-			if (movAuto_z >= 0.0f)
+			if (movAuto_z >= -20.0f)
 			{
 				recorrido_A7 = false;
 				recorrido_A8 = true;
 			}
 		}
-		if (recorrido_A8)
-		{
+		if (recorrido_A8)	//m= Dx/Dz= 0.8
+		{					//Angulo= 45
 			movAuto_x += 3.5f;
-			movAuto_z += 2.0f;
-			orienta = -63.43;
-			if (movAuto_x <= -310.0f)
+			movAuto_z += 2.8f;
+			orienta = -45.00;
+			if (movAuto_z >= 0.0f)
 			{
 				recorrido_A8 = false;
 				recorrido_A9 = true;
@@ -674,6 +682,17 @@ void animate(void)
 		}
 		
 	}
+	
+	//Giro de nube voladora
+	Posicion_Nube.x = 200.0f * sin(PosVariable);
+	Posicion_Nube.z = 250.0f * cos(PosVariable);
+	PosVariable += 0.03f;
+	glTranslatef(Posicion_Nube.x, 0.0f, Posicion_Nube.z);
+	glRotatef(Rotacion_Nube, 0.0f, 1.0f, 0.0f);
+	Rotacion_Nube += 1.3f;
+
+	Posicion_Jake.x = 200.0f * sin(PosVariable);
+	Posicion_Jake.z = 250.0f * cos(PosVariable);
 	
 	
 	if (play)
@@ -1122,11 +1141,23 @@ int main()
 		Ring_ML.RenderModel();
 
 		//Nube voladora
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 20.0f, 0.0f));
-		//model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		//model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 20.0f, 0.0f));
+		model = glm::translate(glm::mat4(1.0f), Posicion_Nube);
+		//model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(Rotacion_Nube), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.3f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Nube_Goku.RenderModel();
+
+		//-------Modelo Jake.-------
+		model = glm::mat4(1.0);
+		//model = glm::translate(model, glm::vec3(-30.0f, 25.0f, 160.0f));
+		model = glm::translate(glm::mat4(1.0f), Posicion_Jake);
+		model = glm::rotate(model, -90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(Rotacion_Nube), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		JAKE_M.RenderModel();
 		
 		//Bocina
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(100.0f, -2.0f, -85.0f));
@@ -1793,13 +1824,14 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		FARO_M.RenderModel();
 		
-		//-------Modelo Jake.-------
+		/*//-------Modelo Jake.-------
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-30.0f, 25.0f, 160.0f));
 		model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		JAKE_M.RenderModel();
+		*/
 		
 		glUseProgram(0);
 		mainWindow.swapBuffers();
