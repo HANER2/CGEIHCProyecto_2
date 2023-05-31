@@ -746,7 +746,7 @@ int main()
 	luz = 1.0f;
 	dia = true;
 	
-	camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.5f, 0.5f);
+	camera = Camera(glm::vec3(0.0f, 70.0f, 150.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f, 0.5f, 0.5f);
 
 	pisoTexture = Texture("Textures/cesped.png");
 	pisoTexture.LoadTextureA();
@@ -1128,7 +1128,6 @@ int main()
 		model = modelaux;
 		model = glm::translate(model, glm::vec3(2.0f + movLata_x, 7.0f + movLata_y, 4.5f + movLata_z));
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(orienta), glm::vec3(0.0f, 0.0f, 1.0f));
 		model = glm::scale(model, glm::vec3(0.8f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Lata.RenderModel();
