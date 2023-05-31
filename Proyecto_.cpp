@@ -742,7 +742,7 @@ int main()
 	//Definimos nuestras variables con las que se hará el ciclo de día y noche
 	movySun = -1.0f; //Aquí la luz siempre va a iniciar apunto a -1 en Y 
 	movSun = -1.0f;
-	movSunOffset = 0.0010f; //Declaramos el tiempo en el que queremos que vaya avanzando la luz. Luz de día dura 15 segundos.
+	movSunOffset = 0.01f; //Declaramos el tiempo en el que queremos que vaya avanzando la luz. Luz de día dura 20 segundos.
 	luz = 1.0f;
 	dia = true;
 	
@@ -1262,39 +1262,44 @@ int main()
 		model = glm::translate(model, glm::vec3(posX, posY, posZ));
 		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::rotate(model, glm::radians(giroMonito), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.5f));
 		modelaux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Frijolito_Torso.RenderModel();
 
 		//Brazo derecho
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(2.0f, -1.0f, 1.0f));
 		model = glm::translate(model, glm::vec3(-0.50f, 2.5f, 0));
-		model = glm::rotate(model, glm::radians(movBrazoDer), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::rotate(model, glm::radians(movBrazoDer), glm::vec3(0.0f, 1.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Frijolito_BrazoDer.RenderModel();
 
 		//Brazo izquierdo
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(2.0f, -1.0f, -1.0f));
 		model = glm::translate(model, glm::vec3(0.50f, 2.5f, 0));
-		model = glm::rotate(model, glm::radians(movBrazoIzq), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::rotate(model, glm::radians(movBrazoIzq), glm::vec3(0.0f, 1.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Frijolito_BrazoIzq.RenderModel();
 
 		//Pierna derecha
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-0.5f, 0.0f, -0.1f));
+		model = glm::translate(model, glm::vec3(-0.5f, 1.0f, -0.1f));
 		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0));
-		model = glm::rotate(model, glm::radians(rotRodDer), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::rotate(model, glm::radians(rotRodDer), glm::vec3(0.0f, 0.0f, -1.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Frijolito_PiernaDer.RenderModel();
 
 		//Pierna izquierda
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(0.5f, 0.0f, -0.1f));
+		model = glm::translate(model, glm::vec3(0.5f, 1.0f, -0.1f));
 		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(rotRodIzq), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::rotate(model, glm::radians(rotRodIzq), glm::vec3(0.0f, 0.0f, -1.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Frijolito_PiernaIzq.RenderModel();
 
