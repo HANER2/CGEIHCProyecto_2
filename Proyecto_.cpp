@@ -2,10 +2,10 @@
 * Universidad Nacional Autónoma de México.
 * Facultad de Ingeniería.
 * Computación gráfica e interacción humano-computadora.
-* Grupo: 6.
+* Grupo Teoria: 6.
 * Proyecto.
-* Alumnos: 	Juan Andrés Cruz Romero.
-*		   Alexis Rafael del Valle Aragón.
+* Alumnos: 	   Juan Andrés Cruz Romero.
+*		   Alexis Rafael del Valle Aragón.	Laboratorio: 08
 *		   Barulio Mauricio Blancas Galicia.//
 */
 //para cargar imagen
