@@ -334,8 +334,8 @@ float	incX = 0.0f,
 		incBrazoIzq = 0.0f;
 
 #define MAX_FRAMES 9000
-int i_max_steps = 70;//Más pasos más lentitud.
-int i_curr_steps = 35;//Número máximo de frames de la animación actual.
+int i_max_steps = 30;//Más pasos más lentitud.
+int i_curr_steps = 70;//Número máximo de frames de la animación actual.
 typedef struct _frame
 {
 	//Variables para guardar movimiento en keyframes.
@@ -359,7 +359,7 @@ typedef struct _frame
 }FRAME;
 
 FRAME KeyFrame[MAX_FRAMES];
-int FrameIndex = 35;//Número máximo de frames de la animación actual.
+int FrameIndex = 70;//Número máximo de frames de la animación actual.
 bool play = false;
 int playIndex = 0;
 
@@ -742,7 +742,7 @@ int main()
 	//Definimos nuestras variables con las que se hará el ciclo de día y noche
 	movySun = -1.0f; //Aquí la luz siempre va a iniciar apunto a -1 en Y 
 	movSun = -1.0f;
-	movSunOffset = 0.01f; //Declaramos el tiempo en el que queremos que vaya avanzando la luz. Luz de día dura 20 segundos.
+	movSunOffset = 0.0157f; //Declaramos el tiempo en el que queremos que vaya avanzando la luz. Luz de día dura 15 segundos.
 	luz = 1.0f;
 	dia = true;
 	
@@ -902,7 +902,7 @@ int main()
 	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 1000.0f);
 	
 	//-------Animación keyframes.-------.
-	//-------Animación keyframes.-------.
+	//1----------------------------
 	KeyFrame[0].posX = 0.0f;
 	KeyFrame[0].posY = 0.0f;
 	KeyFrame[0].posZ = 0.0f;
@@ -917,46 +917,47 @@ int main()
 	KeyFrame[1].posZ = 20.0f;
 	KeyFrame[1].rotRodIzq = -20.0f;
 	KeyFrame[1].giroMonito = 0.0f;
-	KeyFrame[1].movBrazoDer = -15.0f;
+	KeyFrame[1].movBrazoDer = -20.0f;
 	KeyFrame[1].rotRodDer = 20.0f;
-	KeyFrame[1].movBrazoIzq = 15.0f;
+	KeyFrame[1].movBrazoIzq = 20.0f;
 
 	KeyFrame[2].posX = 0.0f;
 	KeyFrame[2].posY = 0.0f;
 	KeyFrame[2].posZ = 40.0f;
 	KeyFrame[2].rotRodIzq = 20.0f;
 	KeyFrame[2].giroMonito = 0.0f;
-	KeyFrame[2].movBrazoDer = 15.0f;
+	KeyFrame[2].movBrazoDer = 20.0f;
 	KeyFrame[2].rotRodDer = -20.0f;
-	KeyFrame[2].movBrazoIzq = -15.0f;
+	KeyFrame[2].movBrazoIzq = -20.0f;
 
 	KeyFrame[3].posX = 0.0f;
 	KeyFrame[3].posY = 0.0f;
 	KeyFrame[3].posZ = 60.0f;
 	KeyFrame[3].rotRodIzq = 0.0f;
 	KeyFrame[3].giroMonito = 0.0f;
-	KeyFrame[3].movBrazoDer = -15.0f;
+	KeyFrame[3].movBrazoDer = 0.0f;
 	KeyFrame[3].rotRodDer = 0.0f;
-	KeyFrame[3].movBrazoIzq = 15.0f;
+	KeyFrame[3].movBrazoIzq = 0.0f;
 
 	KeyFrame[4].posX = 0.0f;
 	KeyFrame[4].posY = 0.0f;
 	KeyFrame[4].posZ = 80.0f;
 	KeyFrame[4].rotRodIzq = -20.0f;
 	KeyFrame[4].giroMonito = 0.0f;
-	KeyFrame[4].movBrazoDer = -15.0f;
+	KeyFrame[4].movBrazoDer = -20.0f;
 	KeyFrame[4].rotRodDer = 20.0f;
-	KeyFrame[4].movBrazoIzq = 15.0f;
+	KeyFrame[4].movBrazoIzq = 20.0f;
 
 	KeyFrame[5].posX = 0.0f;
 	KeyFrame[5].posY = 0.0f;
 	KeyFrame[5].posZ = 100.0f;
 	KeyFrame[5].rotRodIzq = 20.0f;
 	KeyFrame[5].giroMonito = 0.0f;
-	KeyFrame[5].movBrazoDer = 15.0f;
+	KeyFrame[5].movBrazoDer = 20.0f;
 	KeyFrame[5].rotRodDer = -20.0f;
-	KeyFrame[5].movBrazoIzq = -15.0f;
+	KeyFrame[5].movBrazoIzq = -20.0f;
 
+	//2-----------------------------------------
 	KeyFrame[6].posX = 0.0f;
 	KeyFrame[6].posY = 0.0f;
 	KeyFrame[6].posZ = 100.0f;
@@ -971,18 +972,18 @@ int main()
 	KeyFrame[7].posZ = 100.0f;
 	KeyFrame[7].rotRodIzq = -20.0f;
 	KeyFrame[7].giroMonito = -90.0f;
-	KeyFrame[7].movBrazoDer = -15.0f;
+	KeyFrame[7].movBrazoDer = -20.0f;
 	KeyFrame[7].rotRodDer = 20.0f;
-	KeyFrame[7].movBrazoIzq = 15.0f;
+	KeyFrame[7].movBrazoIzq = 20.0f;
 
 	KeyFrame[8].posX = -40.0f;
 	KeyFrame[8].posY = 0.0f;
 	KeyFrame[8].posZ = 100.0f;
 	KeyFrame[8].rotRodIzq = 20.0f;
 	KeyFrame[8].giroMonito = -90.0f;
-	KeyFrame[8].movBrazoDer = 15.0f;
+	KeyFrame[8].movBrazoDer = 20.0f;
 	KeyFrame[8].rotRodDer = -20.0f;
-	KeyFrame[8].movBrazoIzq = -15.0f;
+	KeyFrame[8].movBrazoIzq = -20.0f;
 
 	KeyFrame[9].posX = -60.0f;
 	KeyFrame[9].posY = 0.0f;
@@ -992,16 +993,406 @@ int main()
 	KeyFrame[9].movBrazoDer = 0.0f;
 	KeyFrame[9].rotRodDer = 0.0f;
 	KeyFrame[9].movBrazoIzq = 0.0f;
-
+	//3------------------------------------------
 	KeyFrame[10].posX = -60.0f;
 	KeyFrame[10].posY = 0.0f;
-	KeyFrame[10].posZ = 100.0f;
-	KeyFrame[10].rotRodIzq = 0.0f;
+	KeyFrame[10].posZ = 130.0f;
+	KeyFrame[10].rotRodIzq = 20.0f;
 	KeyFrame[10].giroMonito = 0.0f;
-	KeyFrame[10].movBrazoDer = 0.0f;
-	KeyFrame[10].rotRodDer = 0.0f;
-	KeyFrame[10].movBrazoIzq = 0.0f;
+	KeyFrame[10].movBrazoDer = 20.0f;
+	KeyFrame[10].rotRodDer = -20.0f;
+	KeyFrame[10].movBrazoIzq = -20.0f;
 
+	KeyFrame[11].posX = -60.0f;
+	KeyFrame[11].posY = 0.0f;
+	KeyFrame[11].posZ = 190.0f;
+	KeyFrame[11].rotRodIzq = 2-0.0f;
+	KeyFrame[11].giroMonito = 0.0f;
+	KeyFrame[11].movBrazoDer = -20.0f;
+	KeyFrame[11].rotRodDer = 20.0f;
+	KeyFrame[11].movBrazoIzq = 20.0f;
+
+	KeyFrame[12].posX = -60.0f;
+	KeyFrame[12].posY = 0.0f;
+	KeyFrame[12].posZ = 210.0f;
+	KeyFrame[12].rotRodIzq = 0.0f;
+	KeyFrame[12].giroMonito = 0.0f;
+	KeyFrame[12].movBrazoDer = 0.0f;
+	KeyFrame[12].rotRodDer = 0.0f;
+	KeyFrame[12].movBrazoIzq = 0.0f;
+
+	KeyFrame[13].posX = -60.0f;
+	KeyFrame[13].posY = 0.0f;
+	KeyFrame[13].posZ = 240.0f;
+	KeyFrame[13].rotRodIzq = -20.0f;
+	KeyFrame[13].giroMonito = 0.0f;
+	KeyFrame[13].movBrazoDer = -20.0f;
+	KeyFrame[13].rotRodDer = 20.0f;
+	KeyFrame[13].movBrazoIzq = 20.0f;
+
+	KeyFrame[14].posX = -60.0f;
+	KeyFrame[14].posY = 0.0f;
+	KeyFrame[14].posZ = 270.0f;
+	KeyFrame[14].rotRodIzq = 20.0f;
+	KeyFrame[14].giroMonito = 0.0f;
+	KeyFrame[14].movBrazoDer = 20.0f;
+	KeyFrame[14].rotRodDer = -20.0f;
+	KeyFrame[14].movBrazoIzq = -20.0f;
+
+	KeyFrame[15].posX = -60.0f;
+	KeyFrame[15].posY = 0.0f;
+	KeyFrame[15].posZ = 270.0f;
+	KeyFrame[15].rotRodIzq = 0.0f;
+	KeyFrame[15].giroMonito = 0.0f;
+	KeyFrame[15].movBrazoDer = 0.0f;
+	KeyFrame[15].rotRodDer = 0.0f;
+	KeyFrame[15].movBrazoIzq = 0.0f;
+	//4---------------------------------------
+	KeyFrame[16].posX = -60.0f;
+	KeyFrame[16].posY = 0.0f;
+	KeyFrame[16].posZ = 270.0f;
+	KeyFrame[16].rotRodIzq = 0.0f;
+	KeyFrame[16].giroMonito = 90.0f;
+	KeyFrame[16].movBrazoDer = 0.0f;
+	KeyFrame[16].rotRodDer = 0.0f;
+	KeyFrame[16].movBrazoIzq = 0.0f;
+
+	KeyFrame[17].posX = -30.0f;
+	KeyFrame[17].posY = 0.0f;
+	KeyFrame[17].posZ = 270.0f;
+	KeyFrame[17].rotRodIzq = 20.0f;
+	KeyFrame[17].giroMonito = 90.0f;
+	KeyFrame[17].movBrazoDer = 20.0f;
+	KeyFrame[17].rotRodDer = -20.0f;
+	KeyFrame[17].movBrazoIzq = -20.0f;
+
+	KeyFrame[18].posX = 0.0f;
+	KeyFrame[18].posY = 0.0f;
+	KeyFrame[18].posZ = 270.0f;
+	KeyFrame[18].rotRodIzq = 2 - 0.0f;
+	KeyFrame[18].giroMonito = 90.0f;
+	KeyFrame[18].movBrazoDer = -20.0f;
+	KeyFrame[18].rotRodDer = 20.0f;
+	KeyFrame[18].movBrazoIzq = 20.0f;
+
+	KeyFrame[19].posX = 30.0f;
+	KeyFrame[19].posY = 0.0f;
+	KeyFrame[19].posZ = 270.0f;
+	KeyFrame[19].rotRodIzq = 0.0f;
+	KeyFrame[19].giroMonito = 90.0f;
+	KeyFrame[19].movBrazoDer = 0.0f;
+	KeyFrame[19].rotRodDer = 0.0f;
+	KeyFrame[19].movBrazoIzq = 0.0f;
+
+	KeyFrame[20].posX = 60.0f;
+	KeyFrame[20].posY = 0.0f;
+	KeyFrame[20].posZ = 270.0f;
+	KeyFrame[20].rotRodIzq = -20.0f;
+	KeyFrame[20].giroMonito = 90.0f;
+	KeyFrame[20].movBrazoDer = -20.0f;
+	KeyFrame[20].rotRodDer = 20.0f;
+	KeyFrame[20].movBrazoIzq = 20.0f;
+
+	KeyFrame[21].posX = 90.0f;
+	KeyFrame[21].posY = 0.0f;
+	KeyFrame[21].posZ = 270.0f;
+	KeyFrame[21].rotRodIzq = 20.0f;
+	KeyFrame[21].giroMonito = 90.0f;
+	KeyFrame[21].movBrazoDer = 20.0f;
+	KeyFrame[21].rotRodDer = -20.0f;
+	KeyFrame[21].movBrazoIzq = -20.0f;
+
+	KeyFrame[22].posX = 110.0f;
+	KeyFrame[22].posY = 0.0f;
+	KeyFrame[22].posZ = 270.0f;
+	KeyFrame[22].rotRodIzq = 0.0f;
+	KeyFrame[22].giroMonito = 90.0f;
+	KeyFrame[22].movBrazoDer = 0.0f;
+	KeyFrame[22].rotRodDer = 0.0f;
+	KeyFrame[22].movBrazoIzq = 0.0f;
+	//5----------------------------------
+	KeyFrame[23].posX = 110.0f;
+	KeyFrame[23].posY = 0.0f;
+	KeyFrame[23].posZ = 270.0f;
+	KeyFrame[23].rotRodIzq = 0.0f;
+	KeyFrame[23].giroMonito = 180.0f;
+	KeyFrame[23].movBrazoDer = 0.0f;
+	KeyFrame[23].rotRodDer = 0.0f;
+	KeyFrame[23].movBrazoIzq = 0.0f;
+
+	KeyFrame[24].posX = 110.0f;
+	KeyFrame[24].posY = 0.0f;
+	KeyFrame[24].posZ = 260.0f;
+	KeyFrame[24].rotRodIzq = 20.0f;
+	KeyFrame[24].giroMonito = 180.0f;
+	KeyFrame[24].movBrazoDer = 20.0f;
+	KeyFrame[24].rotRodDer = -20.0f;
+	KeyFrame[24].movBrazoIzq = -20.0f;
+
+	KeyFrame[25].posX = 110.0f;
+	KeyFrame[25].posY = 0.0f;
+	KeyFrame[25].posZ = 230.0f;
+	KeyFrame[25].rotRodIzq = -20.0f;
+	KeyFrame[25].giroMonito = 180.0f;
+	KeyFrame[25].movBrazoDer = -20.0f;
+	KeyFrame[25].rotRodDer = 20.0f;
+	KeyFrame[25].movBrazoIzq = 20.0f;
+
+	KeyFrame[26].posX = 110.0f;
+	KeyFrame[26].posY = 0.0f;
+	KeyFrame[26].posZ = 200.0f;
+	KeyFrame[26].rotRodIzq = 20.0f;
+	KeyFrame[26].giroMonito = 180.0f;
+	KeyFrame[26].movBrazoDer = 20.0f;
+	KeyFrame[26].rotRodDer = -20.0f;
+	KeyFrame[26].movBrazoIzq = -20.0f;
+
+	KeyFrame[27].posX = 110.0f;
+	KeyFrame[27].posY = 0.0f;
+	KeyFrame[27].posZ = 170.0f;
+	KeyFrame[27].rotRodIzq = 0.0f;
+	KeyFrame[27].giroMonito = 180.0f;
+	KeyFrame[27].movBrazoDer = 0.0f;
+	KeyFrame[27].rotRodDer = 0.0f;
+	KeyFrame[27].movBrazoIzq = 0.0f;
+
+	KeyFrame[28].posX = 110.0f;
+	KeyFrame[28].posY = 0.0f;
+	KeyFrame[28].posZ = 140.0f;
+	KeyFrame[28].rotRodIzq = 20.0f;
+	KeyFrame[28].giroMonito = 180.0f;
+	KeyFrame[28].movBrazoDer = 20.0f;
+	KeyFrame[28].rotRodDer = -20.0f;
+	KeyFrame[28].movBrazoIzq = -20.0f;
+
+	KeyFrame[29].posX = 110.0f;
+	KeyFrame[29].posY = 0.0f;
+	KeyFrame[29].posZ = 110.0f;
+	KeyFrame[29].rotRodIzq = -20.0f;
+	KeyFrame[29].giroMonito = 180.0f;
+	KeyFrame[29].movBrazoDer = -20.0f;
+	KeyFrame[29].rotRodDer = 20.0f;
+	KeyFrame[29].movBrazoIzq = 20.0f;
+	////////////////////////////////////
+	KeyFrame[30].posX = 110.0f;
+	KeyFrame[30].posY = 0.0f;
+	KeyFrame[30].posZ = 90.0f;
+	KeyFrame[30].rotRodIzq = 0.0f;
+	KeyFrame[30].giroMonito = 180.0f;
+	KeyFrame[30].movBrazoDer = 0.0f;
+	KeyFrame[30].rotRodDer = 0.0f;
+	KeyFrame[30].movBrazoIzq = 0.0f;
+
+	KeyFrame[31].posX = 110.0f;
+	KeyFrame[31].posY = 0.0f;
+	KeyFrame[31].posZ = 60.0f;
+	KeyFrame[31].rotRodIzq = 20.0f;
+	KeyFrame[31].giroMonito = 180.0f;
+	KeyFrame[31].movBrazoDer = 20.0f;
+	KeyFrame[31].rotRodDer = -20.0f;
+	KeyFrame[31].movBrazoIzq = -20.0f;
+
+	KeyFrame[32].posX = 110.0f;
+	KeyFrame[32].posY = 0.0f;
+	KeyFrame[32].posZ = 30.0f;
+	KeyFrame[32].rotRodIzq = -20.0f;
+	KeyFrame[32].giroMonito = 180.0f;
+	KeyFrame[32].movBrazoDer = -20.0f;
+	KeyFrame[32].rotRodDer = 20.0f;
+	KeyFrame[32].movBrazoIzq = 20.0f;
+
+	KeyFrame[33].posX = 110.0f;
+	KeyFrame[33].posY = 0.0f;
+	KeyFrame[33].posZ = 0.0f;
+	KeyFrame[33].rotRodIzq = 0.0f;
+	KeyFrame[33].giroMonito = 180.0f;
+	KeyFrame[33].movBrazoDer = 0.0f;
+	KeyFrame[33].rotRodDer = 0.0f;
+	KeyFrame[33].movBrazoIzq = 0.0f;
+
+	KeyFrame[34].posX = 110.0f;
+	KeyFrame[34].posY = 0.0f;
+	KeyFrame[34].posZ = -30.0f;
+	KeyFrame[34].rotRodIzq = -20.0f;
+	KeyFrame[34].giroMonito = 180.0f;
+	KeyFrame[34].movBrazoDer = -20.0f;
+	KeyFrame[34].rotRodDer = 20.0f;
+	KeyFrame[34].movBrazoIzq = 20.0f;
+
+	KeyFrame[35].posX = 110.0f;
+	KeyFrame[35].posY = 0.0f;
+	KeyFrame[35].posZ = -60.0f;
+	KeyFrame[35].rotRodIzq = 20.0f;
+	KeyFrame[35].giroMonito = 180.0f;
+	KeyFrame[35].movBrazoDer = 20.0f;
+	KeyFrame[35].rotRodDer = -20.0f;
+	KeyFrame[35].movBrazoIzq = -20.0f;
+
+	KeyFrame[36].posX = 110.0f;
+	KeyFrame[36].posY = 0.0f;
+	KeyFrame[36].posZ = -90.0f;
+	KeyFrame[36].rotRodIzq = 0.0f;
+	KeyFrame[36].giroMonito = 180.0f;
+	KeyFrame[36].movBrazoDer = 0.0f;
+	KeyFrame[36].rotRodDer = 0.0f;
+	KeyFrame[36].movBrazoIzq = 0.0f;
+
+	KeyFrame[37].posX = 110.0f;
+	KeyFrame[37].posY = 0.0f;
+	KeyFrame[37].posZ = -120.0f;
+	KeyFrame[37].rotRodIzq = -20.0f;
+	KeyFrame[37].giroMonito = 180.0f;
+	KeyFrame[37].movBrazoDer = -20.0f;
+	KeyFrame[37].rotRodDer = 20.0f;
+	KeyFrame[37].movBrazoIzq = 20.0f;
+
+	KeyFrame[38].posX = 110.0f;
+	KeyFrame[38].posY = 0.0f;
+	KeyFrame[38].posZ = -150.0f;
+	KeyFrame[38].rotRodIzq = 20.0f;
+	KeyFrame[38].giroMonito = 180.0f;
+	KeyFrame[38].movBrazoDer = 20.0f;
+	KeyFrame[38].rotRodDer = -20.0f;
+	KeyFrame[38].movBrazoIzq = -20.0f;
+
+	KeyFrame[39].posX = 110.0f;
+	KeyFrame[39].posY = 0.0f;
+	KeyFrame[39].posZ = -180.0f;
+	KeyFrame[39].rotRodIzq = 0.0f;
+	KeyFrame[39].giroMonito = 180.0f;
+	KeyFrame[39].movBrazoDer = 0.0f;
+	KeyFrame[39].rotRodDer = 0.0f;
+	KeyFrame[39].movBrazoIzq = 0.0f;
+
+	//6--------------------------------
+	KeyFrame[40].posX = 110.0f;
+	KeyFrame[40].posY = 0.0f;
+	KeyFrame[40].posZ = -180.0f;
+	KeyFrame[40].rotRodIzq = 0.0f;
+	KeyFrame[40].giroMonito = -90.0f;
+	KeyFrame[40].movBrazoDer = 0.0f;
+	KeyFrame[40].rotRodDer = 0.0f;
+	KeyFrame[40].movBrazoIzq = 0.0f;
+
+	KeyFrame[41].posX = 90.0f;
+	KeyFrame[41].posY = 0.0f;
+	KeyFrame[41].posZ = -180.0f;
+	KeyFrame[41].rotRodIzq = -20.0f;
+	KeyFrame[41].giroMonito = -90.0f;
+	KeyFrame[41].movBrazoDer = -20.0f;
+	KeyFrame[41].rotRodDer = 20.0f;
+	KeyFrame[41].movBrazoIzq = 20.0f;
+
+	KeyFrame[42].posX = 60.0f;
+	KeyFrame[42].posY = 0.0f;
+	KeyFrame[42].posZ = -180.0f;
+	KeyFrame[42].rotRodIzq = 20.0f;
+	KeyFrame[42].giroMonito = -90.0f;
+	KeyFrame[42].movBrazoDer = 20.0f;
+	KeyFrame[42].rotRodDer = -20.0f;
+	KeyFrame[42].movBrazoIzq = -20.0f;
+
+	KeyFrame[43].posX = 40.0f;
+	KeyFrame[43].posY = 0.0f;
+	KeyFrame[43].posZ = -180.0f;
+	KeyFrame[43].rotRodIzq = 0.0f;
+	KeyFrame[43].giroMonito = -90.0f;
+	KeyFrame[43].movBrazoDer = 0.0f;
+	KeyFrame[43].rotRodDer = 0.0f;
+	KeyFrame[43].movBrazoIzq = 0.0f;
+
+	KeyFrame[44].posX = 20.0f;
+	KeyFrame[44].posY = 0.0f;
+	KeyFrame[44].posZ = -180.0f;
+	KeyFrame[44].rotRodIzq = -20.0f;
+	KeyFrame[44].giroMonito = -90.0f;
+	KeyFrame[44].movBrazoDer = -20.0f;
+	KeyFrame[44].rotRodDer = 20.0f;
+	KeyFrame[44].movBrazoIzq = 20.0f;
+
+	KeyFrame[45].posX = 0.0f;
+	KeyFrame[45].posY = 0.0f;
+	KeyFrame[45].posZ = -180.0f;
+	KeyFrame[45].rotRodIzq = 20.0f;
+	KeyFrame[45].giroMonito = -90.0f;
+	KeyFrame[45].movBrazoDer = 20.0f;
+	KeyFrame[45].rotRodDer = -20.0f;
+	KeyFrame[45].movBrazoIzq = -20.0f;
+
+	KeyFrame[46].posX = 0.0f;
+	KeyFrame[46].posY = 0.0f;
+	KeyFrame[46].posZ = -180.0f;
+	KeyFrame[46].rotRodIzq = 0.0f;
+	KeyFrame[46].giroMonito = -90.0f;
+	KeyFrame[46].movBrazoDer = 0.0f;
+	KeyFrame[46].rotRodDer = 0.0f;
+	KeyFrame[46].movBrazoIzq = 0.0f;
+
+	//7-----------------------
+	KeyFrame[47].posX = 0.0f;
+	KeyFrame[47].posY = 0.0f;
+	KeyFrame[47].posZ = -180.0f;
+	KeyFrame[47].rotRodIzq = 0.0f;
+	KeyFrame[47].giroMonito = 0.0f;
+	KeyFrame[47].movBrazoDer = 0.0f;
+	KeyFrame[47].rotRodDer = 0.0f;
+	KeyFrame[47].movBrazoIzq = 0.0f;
+
+	KeyFrame[48].posX = 0.0f;
+	KeyFrame[48].posY = 0.0f;
+	KeyFrame[48].posZ = -150.0f;
+	KeyFrame[48].rotRodIzq = -20.0f;
+	KeyFrame[48].giroMonito = 0.0f;
+	KeyFrame[48].movBrazoDer = -20.0f;
+	KeyFrame[48].rotRodDer = 20.0f;
+	KeyFrame[48].movBrazoIzq = 20.0f;
+
+	KeyFrame[49].posX = 0.0f;
+	KeyFrame[49].posY = 0.0f;
+	KeyFrame[49].posZ = -120.0f;
+	KeyFrame[49].rotRodIzq = 20.0f;
+	KeyFrame[49].giroMonito = 0.0f;
+	KeyFrame[49].movBrazoDer = 20.0f;
+	KeyFrame[49].rotRodDer = -20.0f;
+	KeyFrame[49].movBrazoIzq = -20.0f;
+
+	KeyFrame[50].posX = 0.0f;
+	KeyFrame[50].posY = 0.0f;
+	KeyFrame[50].posZ = -90.0f;
+	KeyFrame[50].rotRodIzq = 0.0f;
+	KeyFrame[50].giroMonito = 0.0f;
+	KeyFrame[50].movBrazoDer = 0.0f;
+	KeyFrame[50].rotRodDer = 0.0f;
+	KeyFrame[50].movBrazoIzq = 0.0f;
+
+	KeyFrame[51].posX = 0.0f;
+	KeyFrame[51].posY = 0.0f;
+	KeyFrame[51].posZ = -60.0f;
+	KeyFrame[51].rotRodIzq = -20.0f;
+	KeyFrame[51].giroMonito = 0.0f;
+	KeyFrame[51].movBrazoDer = -20.0f;
+	KeyFrame[51].rotRodDer = 20.0f;
+	KeyFrame[51].movBrazoIzq = 20.0f;
+
+	KeyFrame[52].posX = 0.0f;
+	KeyFrame[52].posY = 0.0f;
+	KeyFrame[52].posZ = -30.0f;
+	KeyFrame[52].rotRodIzq = 20.0f;
+	KeyFrame[52].giroMonito = 0.0f;
+	KeyFrame[52].movBrazoDer = 20.0f;
+	KeyFrame[52].rotRodDer = -20.0f;
+	KeyFrame[52].movBrazoIzq = -20.0f;
+
+	KeyFrame[53].posX = 0.0f;
+	KeyFrame[53].posY = 0.0f;
+	KeyFrame[53].posZ = 0.0f;
+	KeyFrame[53].rotRodIzq = 0.0f;
+	KeyFrame[53].giroMonito = 0.0f;
+	KeyFrame[53].movBrazoDer = 0.0f;
+	KeyFrame[53].rotRodDer = 0.0f;
+	KeyFrame[53].movBrazoIzq = 0.0f;
+	
+	
 	GLfloat now = glfwGetTime();
 	deltaTime = now - lastTime;
 	lastTime = now;
@@ -1159,7 +1550,7 @@ int main()
 		JAKE_M.RenderModel();
 		
 		//Bocina
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(100.0f, -2.0f, -85.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(160.0f, -2.0f, -85.0f));
 		model = glm::rotate(model, glm::radians(-135.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(1.5f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
