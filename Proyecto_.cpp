@@ -71,7 +71,7 @@ bool		recorrido_L1 = true,
 		recorrido_L16 = false,
 		recorrido_L17 = false;
 
-bool reproducir_Lata = false;
+bool reproducir_Lata = true;
 
 // Posiciones para Auto
 float	movAuto_x = 0.0f,
@@ -2278,8 +2278,9 @@ void inputKeyframes(bool* keys)
 	}
 	
 	//Tecla para recorrido y pausa de la lata (1)
-	if (keys[GLFW_KEY_1])
+	/*if (keys[GLFW_KEY_1])
 	{
 		reproducir_Lata = !reproducir_Lata;
 	}
+	*/
 }
