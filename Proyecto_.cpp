@@ -134,6 +134,8 @@ Model MaquinaExpendedora;
 Model Ring_ML;
 //-------Lata.-------
 Model Lata;
+//Balon de basquetball
+Model basketball;
 //-------Nube Voladora.-------
 Model Nube_Goku;
 //-------Modelo autopista.-------
@@ -814,6 +816,9 @@ int main()
 	//-------Modelo Abeja.-------
 	Model ABEJA_M = Model();
 	ABEJA_M.LoadModel("Models/Abeja_2.obj");
+	//---------Balon de basquetball----------
+	Model basketball = Model();
+	basketball.LoadModel("Models/basketball.obj");
 	
 	//Skybox
 	std::vector<std::string> skyboxFaces;
@@ -1503,6 +1508,14 @@ int main()
 		pisoTexture.UseTexture();
 		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[2]->RenderMesh();
+
+
+		//Balon de basquetball
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(35.0f, 5.0f, 0.0f)); //ubicación del modelo
+		//model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(2.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		basketball.RenderModel();
 		
 		//Modelo ----Casa de Kaiosama--------
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-150.0f, -2.0f, -110.0f)); //ubicación del modelo
