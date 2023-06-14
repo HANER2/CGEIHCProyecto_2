@@ -149,13 +149,14 @@ Model arbol1;
 Model arbol2;
 //-------Modelo Jake.-------
 Model JAKE_M;
-
 //-------Frijolito------
 Model Frijolito_Torso;
 Model Frijolito_BrazoDer;
 Model Frijolito_BrazoIzq;
 Model Frijolito_PiernaDer;
 Model Frijolito_PiernaIzq;
+//-------Modelo Abeja.-------
+Model ABEJA_M;
 
 Skybox skybox;
 Skybox skybox1;
@@ -799,7 +800,6 @@ int main()
 	//-------Modelo Jake.-------
 	Model JAKE_M = Model();
 	JAKE_M.LoadModel("Models/Jake_2.obj");
-	
 	//-----Frijolito---------
 	Model Frijolito_Torso = Model();
 	Frijolito_Torso.LoadModel("Models/Frijolito_Torso.obj");
@@ -811,6 +811,9 @@ int main()
 	Frijolito_PiernaDer.LoadModel("Models/Frijolito_PiernaDer.obj");
 	Model Frijolito_PiernaIzq = Model();
 	Frijolito_PiernaIzq.LoadModel("Models/Frijolito_PiernaIzq.obj");
+	//-------Modelo Abeja.-------
+	Model ABEJA_M = Model();
+	ABEJA_M.LoadModel("Models/Abeja_2.obj");
 	
 	//Skybox
 	std::vector<std::string> skyboxFaces;
@@ -2218,7 +2221,6 @@ int main()
 		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		FARO_M.RenderModel();
-		
 		/*//-------Modelo Jake.-------
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-30.0f, 25.0f, 160.0f));
@@ -2227,6 +2229,13 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		JAKE_M.RenderModel();
 		*/
+		//-------Modelo abeja.-------
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(50.0f, 7.0f, 50.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(7.0f, 7.0f, 7.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		ABEJA_M.RenderModel();
 		
 		glUseProgram(0);
 		mainWindow.swapBuffers();
