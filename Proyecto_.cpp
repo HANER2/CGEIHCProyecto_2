@@ -5,7 +5,7 @@
 * Grupo Teoria: 6.
 * Proyecto.
 * Alumnos: 	   Juan Andrés Cruz Romero.
-*		   Alexis Rafael del Valle Aragón.	Laboratorio: 08
+*		   Alexis Rafael del Valle Aragón.	
 *		   Barulio Mauricio Blancas Galicia.//
 */
 //para cargar imagen
@@ -72,6 +72,16 @@ bool		recorrido_L1 = true,
 		recorrido_L17 = false;
 
 bool reproducir_Lata = true;
+
+//Rebote de balon
+bool	Botar_Balon = false;
+bool	Rebote_1 = true,
+		Rebote_2 = false;
+
+float movBalon_y = 0.0f;
+float Giro_x = 0.0f;  // Rango de ángulos para el eje X
+float Giro_y = 0.0f;  // Rango de ángulos para el eje Y
+float Giro_z = 0.0f;  // Rango de ángulos para el eje Z
 
 // Posiciones para Auto
 float	movAuto_x = 0.0f,
@@ -405,8 +415,36 @@ void interpolation(void)
 
 void animate(void)
 {
+	//Animación del balon (se inicializa con la tecla "1")
+	if (Botar_Balon)
+	{
+		if (Rebote_1)
+		{
+			movBalon_y += 5.0f;
+			Giro_x += glm::linearRand(0.0f, 360.0f);
+			Giro_y += glm::linearRand(0.0f, 360.0f);
+			Giro_z += glm::linearRand(0.0f, 360.0f);
+			if (movBalon_y >= 60.0f)
+			{
+				Rebote_1 = false;
+				Rebote_2 = true;
+			}
+		}
+		if (Rebote_2)
+		{
+			movBalon_y -= 5.0f;
+			Giro_x += glm::linearRand(0.0f, 360.0f);
+			Giro_y += glm::linearRand(0.0f, 360.0f);
+			Giro_z += glm::linearRand(0.0f, 360.0f);
+			if (movBalon_y <= 0.0f)
+			{
+				Rebote_2 = false;
+				Rebote_1 = true;
+			}
+		}
+	}
 	
-	//------Recorrido de lata (Se inicializa y pausa con la tecla "1")
+	//------Recorrido de lata (Automatico)
 	if (reproducir_Lata)
 	{
 		if (recorrido_L1)
@@ -1511,8 +1549,10 @@ int main()
 
 
 		//Balon de basquetball
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(35.0f, 5.0f, 0.0f)); //ubicación del modelo
-		//model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(35.0f, 5.0f + movBalon_y, 0.0f)); //ubicación del modelo
+		model = glm::rotate(model, glm::radians(Giro_x), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(Giro_y), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(Giro_z), glm::vec3(0.0f, 0.0f, 1.0f));
 		model = glm::scale(model, glm::vec3(2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		basketball.RenderModel();
@@ -2290,10 +2330,9 @@ void inputKeyframes(bool* keys)
 		}
 	}
 	
-	//Tecla para recorrido y pausa de la lata (1)
-	/*if (keys[GLFW_KEY_1])
+	//Tecla para rebotar balon (1)
+	if (keys[GLFW_KEY_1])
 	{
-		reproducir_Lata = !reproducir_Lata;
+		Botar_Balon = !Botar_Balon;
 	}
-	*/
 }
