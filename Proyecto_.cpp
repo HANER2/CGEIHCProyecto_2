@@ -184,6 +184,10 @@ Model Frijolito_PiernaDer;
 Model Frijolito_PiernaIzq;
 //-------Modelo Abeja.-------
 Model ABEJA_M;
+//-------Modelo canasta.-------
+Model CANASTA_M;
+//-------Modelo lámpara.-------
+Model LAMPARA2_M;
 
 Skybox skybox;
 Skybox skybox1;
@@ -829,6 +833,64 @@ void animate(void)
 
 	}
 }
+//-------Toroide de Juan Andrés Cruz Romero.-------
+void createTorus(GLfloat radius, GLfloat tubeRadius, GLuint numSegments, GLuint numSides, std::vector<GLfloat>& vertices, std::vector<GLuint>& indices)
+{
+	GLfloat segmentAngle = 20.0f * glm::pi<float>() / numSegments;
+	GLfloat sideAngle = 20.0f * glm::pi<float>() / numSides;
+
+	for (GLuint i = 0; i <= numSegments; ++i)
+	{
+		GLfloat theta = i * segmentAngle;
+		GLfloat cosTheta = cos(theta);
+		GLfloat sinTheta = sin(theta);
+
+		for (GLuint j = 0; j <= numSides; ++j)
+		{
+			GLfloat phi = j * sideAngle;
+			GLfloat cosPhi = cos(phi);
+			GLfloat sinPhi = sin(phi);
+
+			GLfloat x = (radius + tubeRadius * cosPhi) * cosTheta;
+			GLfloat y = (radius + tubeRadius * cosPhi) * sinTheta;
+			GLfloat z = tubeRadius * sinPhi;
+
+			GLfloat u = (GLfloat)i / numSides;
+			GLfloat v = (GLfloat)j / numSegments;
+
+			vertices.push_back(x);
+			vertices.push_back(y);
+			vertices.push_back(z);
+			vertices.push_back(u);
+			vertices.push_back(v);
+
+			// Calcular las normales
+			glm::vec3 normal(cosTheta * cosPhi, sinTheta * cosPhi, sinPhi);
+			vertices.push_back(normal.x);
+			vertices.push_back(normal.y);
+			vertices.push_back(normal.z);
+		}
+	}
+
+	for (GLuint i = 0; i < numSegments; ++i)
+	{
+		for (GLuint j = 0; j < numSides; ++j)
+		{
+			GLuint topLeft = i * (numSides + 1) + j;
+			GLuint topRight = topLeft + 1;
+			GLuint bottomLeft = (i + 1) * (numSides + 1) + j;
+			GLuint bottomRight = bottomLeft + 1;
+
+			indices.push_back(topLeft);
+			indices.push_back(bottomLeft);
+			indices.push_back(topRight);
+
+			indices.push_back(topRight);
+			indices.push_back(bottomLeft);
+			indices.push_back(bottomRight);
+		}
+	}
+}
 
 int main()
 {
@@ -846,6 +908,13 @@ int main()
 	dia = true;
 	
 	camera = Camera(glm::vec3(0.0f, 70.0f, 150.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f, 0.5f, 0.5f);
+
+	//-------Toroide de Juan Andrés Cruz Romero.-------
+	std::vector<GLfloat> torusVertices;
+	std::vector<GLuint> torusIndices;
+	createTorus(0.8f, 0.2f, 500, 500, torusVertices, torusIndices);
+	Mesh torusMesh;
+	torusMesh.CreateMesh(torusVertices.data(), torusIndices.data(), torusVertices.size() / 8, torusIndices.size());
 
 	pisoTexture = Texture("Textures/cesped.png");
 	pisoTexture.LoadTextureA();
@@ -915,6 +984,12 @@ int main()
 	//---------Balon de basquetball----------
 	Model basketball = Model();
 	basketball.LoadModel("Models/basketball.obj");
+	//-------Modelo Canasta.-------
+	Model CANASTA_M = Model();
+	CANASTA_M.LoadModel("Models/Canasta_1.obj");
+	//-------Modelo lámpara.-------
+	Model LAMPARA2_M = Model();
+	LAMPARA2_M.LoadModel("Models/Lámpara_2.obj");
 	
 	//Skybox
 	std::vector<std::string> skyboxFaces;
@@ -969,35 +1044,59 @@ int main()
 	*/
 	//-------Luz de esfera del dragón.-------
 	spotLights[0] = SpotLight(1.0f, 0.4f, 0.0f,//Color: Naranja.
-		10.0f, 10.0f,//Profundidad.
-		-2.0f, 5.0f, -50.2f,//Posición normal.
+		5.0f, 5.0f,//Profundidad.
+		-2.0f, 40.0f, -50.2f,//Posición normal.
 		0.0f, -5.0f, 0.0f,//Dirección de profundidad.
 		2.0f, 0.0f, 0.0f,//Cercanía.
 		70.0f);//Ancho.
 	spotLightCount++;
 	//-------Luz de faro superior izquierdo.-------
 	spotLights[1] = SpotLight(0.0f, 0.0f, 1.0f,//Color: Azul.
-		10.0f, 10.0f,//Profundidad.
-		315.0f, 5.0f, -315.0f,//Posición normal.
+		5.0f, 5.0f,//Profundidad.
+		315.0f, 30.0f, -315.0f,//Posición normal.
 		0.0f, -5.0f, 0.0f,//Dirección de profundidad.
 		2.0f, 0.0f, 0.0f,//Cercanía.
 		90.0f);//Ancho.
 	spotLightCount++;
 	//-------Luz de faro inferior izquierdo.-------
 	spotLights[2] = SpotLight(0.0f, 0.0f, 1.0f,//Color: Azul.
-		10.0f, 10.0f,//Profundidad.
-		-315.0f, 5.0f, -315.0f,//Posición normal.
+		5.0f, 5.0f,//Profundidad.
+		-315.0f, 30.0f, -315.0f,//Posición normal.
 		0.0f, -5.0f, 0.0f,//Dirección de profundidad.
 		2.0f, 0.0f, 0.0f,//Cercanía.
 		90.0f);//Ancho.
 	spotLightCount++;
 	//-------Luz de faro inferior derecho.-------
 	spotLights[3] = SpotLight(0.0f, 0.0f, 1.0f,//Color: Azul.
-		10.0f, 10.0f,//Profundidad.
-		-315.0f, 5.0f, 315.0f,//Posición normal.
+		5.0f, 5.0f,//Profundidad.
+		-315.0f, 30.0f, 315.0f,//Posición normal.
 		0.0f, -5.0f, 0.0f,//Dirección de profundidad.
 		2.0f, 0.0f, 0.0f,//Cercanía.
 		90.0f);//Ancho.
+	spotLightCount++;
+	//-------Luz de ring.-------
+	spotLights[4] = SpotLight(1.0f, 0.0f, 1.0f,//Color: Magenta.
+		10.0f, 10.0f,//Profundidad.
+		-150.0f, 60.0f, 160.0f,//Posición normal.
+		0.0f, -5.0f, 0.0f,//Dirección de profundidad.
+		2.0f, 0.0f, 0.0f,//Cercanía.
+		70.0f);//Ancho.
+	spotLightCount++;
+	//-------Luz de máquina expendedora.-------
+	spotLights[5] = SpotLight(1.0f, 1.0f, 1.0f,//Color: Blanco.
+		5.0f, 5.0f,//Profundidad.
+		-120.0f, 40.0f, -25.0f,//Posición normal.
+		0.0f, -5.0f, 0.0f,//Dirección de profundidad.
+		2.0f, 0.0f, 0.0f,//Cercanía.
+		70.0f);//Ancho.
+	spotLightCount++;
+	//-------Luz de lámpara.-------
+	spotLights[6] = SpotLight(1.0f, 1.0f, 1.0f,//Color: Blanco.
+		2.5f, 2.5f,//Profundidad.
+		162.0f, 80.0f, -85.0f,//Posición normal.
+		0.0f, -5.0f, 0.0f,//Dirección de profundidad.
+		2.0f, 0.0f, 0.0f,//Cercanía.
+		70.0f);//Ancho.
 	spotLightCount++;
 	
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
@@ -2359,6 +2458,90 @@ int main()
 		model = glm::scale(model, glm::vec3(7.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		ABEJA_M.RenderModel();
+
+		//-------Toroide de Juan Andrés Cruz Romero.-------
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(106.0f, 52.0f, 120.0f));
+		model = glm::rotate(model, 82 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(18.0f, 18.0f, 14.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		torusMesh.RenderMesh();
+
+		//-------Modelo canasta.-------
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(130.0f, -2.0f, 120.0f));
+		model = glm::rotate(model, 180 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.5f, 1.5f, 1.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		CANASTA_M.RenderModel();
+
+		//-------Modelo lámpara.-------
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(150.0f, 45.0f, -80.0f));
+		model = glm::rotate(model, -10 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(100.0f, 100.0f, 100.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		LAMPARA2_M.RenderModel();
+
+		//-------Control de luces por teclado.-------
+		//Luz de ring: 4 enciende y 5 apaga.
+		if (mainWindow.getFlagLight_1() == 1) {
+			//-------Luz de ring.-------
+			spotLights[4] = SpotLight(1.0f, 0.0f, 1.0f,//Color: Magenta.
+				10.0f, 10.0f,//Profundidad.
+				-150.0f, 60.0f, 160.0f,//Posición normal.
+				0.0f, -5.0f, 0.0f,//Dirección de profundidad.
+				2.0f, 0.0f, 0.0f,//Cercanía.
+				70.0f);//Ancho.
+		}
+		else if(mainWindow.getFlagLight_1() == 0) {
+			//-------Luz de ring.-------
+			spotLights[4] = SpotLight(0.0f, 0.0f, 0.0f,//Color: Transparente.
+				10.0f, 10.0f,//Profundidad.
+				-150.0f, 60.0f, 160.0f,//Posición normal.
+				0.0f, -5.0f, 0.0f,//Dirección de profundidad.
+				2.0f, 0.0f, 0.0f,//Cercanía.
+				70.0f);//Ancho.
+		}
+		//Luz de máquina expendedora: 6 enciende y 7 apaga.
+		if (mainWindow.getFlagLight_2() == 1) {
+			//-------Luz de máquina expendedora.-------
+			spotLights[5] = SpotLight(1.0f, 1.0f, 1.0f,//Color: Blanco.
+				5.0f, 5.0f,//Profundidad.
+				-120.0f, 40.0f, -25.0f,//Posición normal.
+				0.0f, -5.0f, 0.0f,//Dirección de profundidad.
+				2.0f, 0.0f, 0.0f,//Cercanía.
+				70.0f);//Ancho.
+		}
+		else if (mainWindow.getFlagLight_2() == 0) {
+			//-------Luz de máquina expendedora.-------
+			spotLights[5] = SpotLight(0.0f, 0.0f, 0.0f,//Color: Transparente.
+				5.0f, 5.0f,//Profundidad.
+				-120.0f, 40.0f, -25.0f,//Posición normal.
+				0.0f, -5.0f, 0.0f,//Dirección de profundidad.
+				2.0f, 0.0f, 0.0f,//Cercanía.
+				70.0f);//Ancho.
+		}
+		//Luz de lámpara de luna: 8 enciende y 9 apaga.
+		if (mainWindow.getFlagLight_3() == 1) {
+			//-------Luz de lámpara.-------
+			spotLights[6] = SpotLight(1.0f, 1.0f, 1.0f,//Color: Blanco.
+				2.5f, 2.5f,//Profundidad.
+				162.0f, 80.0f, -85.0f,//Posición normal.
+				0.0f, -5.0f, 0.0f,//Dirección de profundidad.
+				2.0f, 0.0f, 0.0f,//Cercanía.
+				70.0f);//Ancho.
+		}
+		else if (mainWindow.getFlagLight_3() == 0) {
+			//-------Luz de lámpara.-------
+			spotLights[6] = SpotLight(0.0f, 0.0f, 0.0f,//Color: Transparente.
+				2.5f, 2.5f,//Profundidad.
+				162.0f, 80.0f, -85.0f,//Posición normal.
+				0.0f, -5.0f, 0.0f,//Dirección de profundidad.
+				2.0f, 0.0f, 0.0f,//Cercanía.
+				70.0f);//Ancho.
+		}
 		
 		glUseProgram(0);
 		mainWindow.swapBuffers();
