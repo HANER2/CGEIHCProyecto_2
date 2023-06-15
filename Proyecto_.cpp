@@ -1545,11 +1545,6 @@ int main()
 			}
 		}
 		
-		//Recibir eventos del usuario
-		glfwPollEvents();
-		camera.keyControl(mainWindow.getsKeys(), deltaTime);
-		camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
-
 		//Para keyframes.
 		inputKeyframes(mainWindow.getsKeys());
 		animate();
@@ -1566,6 +1561,24 @@ int main()
 		uniformColor = shaderList[0].getColorLocation();
 		uniformTextureOffset = shaderList[0].getOffsetLocation();
 
+		//Recibir eventos del usuario
+		glfwPollEvents();
+		camera.keyControl(mainWindow.getsKeys(), deltaTime);
+		//Cámara tercera persona
+		if(mainWindow.getcam()==0)
+			camera.mouseControl(mainWindow.getXChange(), NULL);
+		//Camara libre
+		else if(mainWindow.getcam() == 1)
+			camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
+		else if(mainWindow.getcam() == 2) {
+			glm::vec3 cameraPosition = glm::vec3(300.0f, 100.0f, 300.0f);
+			glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+			glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+			glm::mat4 view = glm::lookAt(cameraPosition, cameraTarget, cameraUp);
+			glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(view));
+		}
+
+		
 		//información en el shader de intensidad especular y brillo
 		uniformSpecularIntensity = shaderList[0].GetSpecularIntensityLocation();
 		uniformShininess = shaderList[0].GetShininessLocation();
