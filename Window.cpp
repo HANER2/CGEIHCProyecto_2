@@ -13,6 +13,10 @@ Window::Window(GLint windowWidth, GLint windowHeight)
 {
 	width = windowWidth;
 	height = windowHeight;
+	//-------Banderas para luces.-------
+	FlagLight_1 = NULL;
+	FlagLight_2 = NULL;
+	FlagLight_2 = NULL;
 	cam = 0;
 
 	for (size_t i = 0; i < 1024; i++)
@@ -100,6 +104,25 @@ GLfloat Window::getYChange()
 void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, int mode)
 {
 	Window* theWindow = static_cast<Window*>(glfwGetWindowUserPointer(window));
+	//-------Banderas para luces.-------
+	if (key == GLFW_KEY_4) {
+		theWindow->FlagLight_1 = 1;
+	}
+	if (key == GLFW_KEY_5) {
+		theWindow->FlagLight_1 = 0;
+	}
+	if (key == GLFW_KEY_6) {
+		theWindow->FlagLight_2 = 1;
+	}
+	if (key == GLFW_KEY_7) {
+		theWindow->FlagLight_2 = 0;
+	}
+	if (key == GLFW_KEY_8) {
+		theWindow->FlagLight_3 = 1;
+	}
+	if (key == GLFW_KEY_9) {
+		theWindow->FlagLight_3 = 0;
+	}
 
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 	{
