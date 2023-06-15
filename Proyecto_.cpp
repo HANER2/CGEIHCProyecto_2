@@ -11,6 +11,9 @@
 //para cargar imagen
 #define STB_IMAGE_IMPLEMENTATION
 
+//Libreria irrklang para sonido
+//#include <irrKlang/irrKlang.h>
+
 #include <stdio.h>
 #include <string.h>
 #include <cmath>
@@ -892,6 +895,9 @@ void createTorus(GLfloat radius, GLfloat tubeRadius, GLuint numSegments, GLuint 
 	}
 }
 
+//Función para agregar sonido
+//irrklang::ISoundEngine* SoundEngine = irrklang::createIrrKlangDevice();
+
 int main()
 {
 	mainWindow = Window(1366, 768); // 1280, 1024 or 1024, 768
@@ -1607,7 +1613,10 @@ int main()
 		deltaTime = now - lastTime;
 		deltaTime = (now - lastTime) * 270;
 		lastTime = now;
-		
+
+		//Mandamos a llamar a nuestro audio
+		//SoundEngine->play2D("forest-lullaby.mp3", true);
+
 		//Realizamos nuestro ciclo de día y noche dentro de whilec con duración de 1 minuto con 10 segundos.
 		if (dia == true)
 		{
