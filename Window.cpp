@@ -105,17 +105,17 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 	{
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	}
-	//Cámara tercera persona
-	if (key == GLFW_KEY_Y)
+	if (key == GLFW_KEY_B)
 	{
-		//theWindow-> muevex += 1.0;
 		theWindow->cam = 0;
 	}
-	//Cámara fija
-	if (key == GLFW_KEY_U)
+	if (key == GLFW_KEY_N)
 	{
-		//theWindow-> muevex -= 1.0;
 		theWindow->cam = 1;
+	}
+	if (key == GLFW_KEY_M)
+	{
+		theWindow->cam = 2;
 	}
 	if (key >= 0 && key < 1024)
 	{
