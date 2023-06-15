@@ -83,6 +83,21 @@ float Giro_x = 0.0f;  // Rango de ángulos para el eje X
 float Giro_y = 0.0f;  // Rango de ángulos para el eje Y
 float Giro_z = 0.0f;  // Rango de ángulos para el eje Z
 
+//Vuelo de abeja
+bool	Vuelo_Abeja = false,
+		Vuelo1 = true,
+		Vuelo2 = false;
+
+glm::vec3 Posicion_Abeja(50.0f, 7.0f, 50.0f);
+float	PosVariableAbeja = 0.0f,
+		movAbeja_y = 0.0f,
+		Giro_Abeja = 0.0f;
+float radio = 0.0f; // Radio inicial de la espiral
+float angulo = 0.0f; // Ángulo inicial de la espiral
+float velocidad = 0.03f; // Velocidad de avance de la espiral
+float incremento_angulo = 1.3f; // Incremento del ángulo de rotación
+
+
 // Posiciones para Auto
 float	movAuto_x = 0.0f,
 		movAuto_z = 0.0f,
@@ -734,7 +749,50 @@ void animate(void)
 
 	Posicion_Jake.x = 200.0f * sin(PosVariable);
 	Posicion_Jake.z = 250.0f * cos(PosVariable);
-	
+
+
+	//Vuelo de abeja
+	if (Vuelo_Abeja)
+	{
+		if (Vuelo1)
+		{
+			Posicion_Abeja.x = radio * sin(angulo);
+			Posicion_Abeja.z = radio * cos(angulo);
+			Posicion_Abeja.y += 1.0f;
+			radio += 1.0;
+			angulo += 0.05f;
+
+			glTranslatef(Posicion_Abeja.x, Posicion_Abeja.y, Posicion_Abeja.z);
+			glRotatef(Giro_Abeja,0.0f, 1.0f, 0.0f);
+			Giro_Abeja += 2.5f;
+
+			if (Posicion_Abeja.y >= 150.0f)
+			{
+				Vuelo1 = false;
+				Vuelo2 = true;
+			}
+		}
+		if (Vuelo2)
+		{
+			Posicion_Abeja.x = radio * sin(angulo);
+			Posicion_Abeja.z = radio * cos(angulo);
+			Posicion_Abeja.y -= 1.0f;
+			radio -= 1.0f;
+			angulo += 0.05f;
+
+			glTranslatef(Posicion_Abeja.x, Posicion_Abeja.y, Posicion_Abeja.z);
+			glRotatef(Giro_Abeja, 0.0f, 1.0f, 0.0f);
+
+			Giro_Abeja += 2.5f;
+
+			if (Posicion_Abeja.y <= 0.0f)
+			{
+				Vuelo1 = true;
+				Vuelo2 = false;
+			}
+		}
+		
+	}
 	
 	if (play)
 	{
@@ -2283,10 +2341,9 @@ int main()
 		JAKE_M.RenderModel();
 		*/
 		//-------Modelo abeja.-------
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(50.0f, 7.0f, 50.0f));
-		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(7.0f, 7.0f, 7.0f));
+		model = glm::translate(glm::mat4(1.0f), Posicion_Abeja);
+		model = glm::rotate(model, glm::radians(Giro_Abeja), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(7.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		ABEJA_M.RenderModel();
 		
@@ -2334,5 +2391,11 @@ void inputKeyframes(bool* keys)
 	if (keys[GLFW_KEY_1])
 	{
 		Botar_Balon = !Botar_Balon;
+	}
+
+	//Tecla para vuelo de abeja (2)
+	if (keys[GLFW_KEY_2])
+	{
+		Vuelo_Abeja = !Vuelo_Abeja;
 	}
 }
