@@ -1090,7 +1090,7 @@ int main()
 		2.0f, 0.0f, 0.0f,//Cercanía.
 		70.0f);//Ancho.
 	spotLightCount++;
-	//-------Luz de lámpara.-------
+	//-------Luz de bocina.-------
 	spotLights[6] = SpotLight(1.0f, 1.0f, 1.0f,//Color: Blanco.
 		2.5f, 2.5f,//Profundidad.
 		162.0f, 80.0f, -85.0f,//Posición normal.
@@ -2523,21 +2523,21 @@ int main()
 				2.0f, 0.0f, 0.0f,//Cercanía.
 				70.0f);//Ancho.
 		}
-		//Luz de lámpara de luna: 8 enciende y 9 apaga.
+		//Luz de esfera del dragón: 8 enciende y 9 apaga.
 		if (mainWindow.getFlagLight_3() == 1) {
-			//-------Luz de lámpara.-------
-			spotLights[6] = SpotLight(1.0f, 1.0f, 1.0f,//Color: Blanco.
-				2.5f, 2.5f,//Profundidad.
-				162.0f, 80.0f, -85.0f,//Posición normal.
+			//-------Luz de esfera del drágon.-------
+			spotLights[0] = SpotLight(1.0f, 0.4f, 0.0f,//Color: Naranja.
+				5.0f, 5.0f,//Profundidad.
+				-2.0f, 40.0f, -50.2f,//Posición normal.
 				0.0f, -5.0f, 0.0f,//Dirección de profundidad.
 				2.0f, 0.0f, 0.0f,//Cercanía.
 				70.0f);//Ancho.
 		}
 		else if (mainWindow.getFlagLight_3() == 0) {
-			//-------Luz de lámpara.-------
-			spotLights[6] = SpotLight(0.0f, 0.0f, 0.0f,//Color: Transparente.
-				2.5f, 2.5f,//Profundidad.
-				162.0f, 80.0f, -85.0f,//Posición normal.
+			//-------Luz de esfera del drágon.-------
+			spotLights[0] = SpotLight(0.0f, 0.0f, 0.0f,//Color: Transparente.
+				5.0f, 5.0f,//Profundidad.
+				-2.0f, 40.0f, -50.2f,//Posición normal.
 				0.0f, -5.0f, 0.0f,//Dirección de profundidad.
 				2.0f, 0.0f, 0.0f,//Cercanía.
 				70.0f);//Ancho.
