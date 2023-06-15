@@ -13,6 +13,11 @@ public:
 	GLfloat getBufferHeight() { return bufferHeight; }
 	GLfloat getXChange();
 	GLfloat getYChange();
+	//-------Banderas para luces.-------
+	GLint getFlagLight_1() { return FlagLight_1; }
+	GLint getFlagLight_2() { return FlagLight_2; }
+	GLint getFlagLight_3() { return FlagLight_3; }
+
 	GLint getcam() { return cam; }
 	bool getShouldClose() {
 		return  glfwWindowShouldClose(mainWindow);}
@@ -30,6 +35,10 @@ private:
 	GLfloat lastY;
 	GLfloat xChange;
 	GLfloat yChange;
+	GLint FlagLight_1;
+	GLint FlagLight_2;
+	GLint FlagLight_3;
+
 	GLint cam;
 
 	bool mouseFirstMoved;
